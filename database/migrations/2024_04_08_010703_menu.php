@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('menu', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('setting_id')->unsigned();
-            $table->foreign('setting_id')->references('id')->on('settings');
-            $table->index('setting_id');
             $table->string('name');
             $table->string('route');
             $table->string('prefix');
             $table->integer('ordering')->default(0);
             $table->tinyInteger('is_admin')->unsigned()->default(0);
+            $table->tinyInteger('is_active')->unsigned()->default(0);
             $table->timestamps();
         });
     }
