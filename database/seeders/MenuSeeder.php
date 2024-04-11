@@ -47,14 +47,6 @@ class MenuSeeder extends Seeder
                 'is_active' => 1,
             ],
             [
-                'name'      => 'Pengaturan',
-                'route'     => 'admin.settings',
-                'prefix'    => 'settings',
-                'ordering'  => 5,
-                'is_admin'  => 1,
-                'is_active' => 1,
-            ],
-            [
                 'name'      => 'Pengaturan Menu',
                 'route'     => 'admin.navbars',
                 'prefix'    => 'navbars',
