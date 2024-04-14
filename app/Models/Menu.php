@@ -10,7 +10,7 @@ class Menu extends Model
     use HasFactory;
     protected $table = 'menu';
     protected $fillable = [
-        'name',
+        'par_id',
         'name',
         'route',
         'prefix',
@@ -18,4 +18,9 @@ class Menu extends Model
         'is_admin',
         'is_active'
     ];
+
+    public function sub_menu()
+    {
+        return $this->hasMany(Menu::class, 'par_id');
+    }
 }

@@ -14,7 +14,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $menu = Menu::orderBy('id', 'desc')->get();
+        $menu = Menu::orderBy('id', 'desc')->paginate(10);
         $data    = [
             'title' => 'Navbars',
             'menus' => $menu
@@ -27,8 +27,10 @@ class SettingsController extends Controller
      */
     public function create()
     {
+        $menu = Menu::with(['sub_menu'])->where('is_active', 1)->where('par_id', 0)->orderBy('ordering')->get();
         $data = [
             'title' => 'Navbars Create',
+            'menus' => $menu
         ];
         return view('admin.navbars_create', $data);
     }
@@ -57,7 +59,8 @@ class SettingsController extends Controller
             'route'    => $request->route,
             'prefix'   => $request->prefix,
             'is_admin' => $request->is_admin,
-            'ordering' => Menu::select('ordering')->orderBy('ordering', 'desc')->first()->ordering + 1
+            'ordering' => Menu::select('ordering')->orderBy('ordering', 'desc')->first()->ordering + 1,
+            'par_id'   => $request->par_id ?? 0
         ];
         Menu::create($post);
 

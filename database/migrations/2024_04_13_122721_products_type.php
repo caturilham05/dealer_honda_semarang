@@ -8,18 +8,15 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * 2024_04_13_122721_products_type.php
      */
     public function up(): void
     {
-        Schema::create('menu', function (Blueprint $table) {
+        Schema::create('products_type', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('par_id')->unsigned()->default(0);
-            $table->index('par_id');
             $table->string('name');
-            $table->string('route');
-            $table->string('prefix');
-            $table->integer('ordering')->default(0);
-            $table->tinyInteger('is_admin')->unsigned()->default(0);
+            $table->float('price', 22,2)->unsigned();
+            $table->integer('years')->unsigned()->nullable();
             $table->tinyInteger('is_active')->unsigned()->default(0);
             $table->timestamps();
         });

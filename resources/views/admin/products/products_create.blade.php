@@ -9,7 +9,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('admin.navbars.create')}}">{{$title}}</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.products.products_create')}}">{{$title}}</a></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -21,7 +21,7 @@
     <div class="card">
         <!-- /.card-header -->
         <!-- form start -->
-        <form action="{{route('admin.navbars.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('admin.products.store')}}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="card-body">
             <div class="form-group">

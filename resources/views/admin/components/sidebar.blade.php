@@ -17,11 +17,28 @@
                 @foreach ($menu as $item)
                     @if (!empty($item->is_admin))
                         <li class="nav-item">
-                            <a href="{{route($item->route)}}" class="nav-link {{Request::segment(2) == $item->prefix ? 'active' : ''}}">
+                            <a href="@if(!$item->sub_menu->isEmpty()) # @else {{route($item->route)}} @endif" class="nav-link {{Request::segment(2) == $item->prefix ? 'active' : ''}}">
                                 <p>
                                     {{$item->name}}
+                                    @if (!$item->sub_menu->isEmpty())
+                                        <i class="fas fa-angle-left right"></i>
+                                    @endif
                                 </p>
                             </a>
+                            @if (!$item->sub_menu->isEmpty())
+                                @foreach ($item->sub_menu as $item_sub_menu)
+                                    @if ($item_sub_menu->is_active == 1)                                    
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="{{route($item_sub_menu->route)}}" class="nav-link {{Request::segment(3) == $item_sub_menu->prefix ? 'active' : ''}}">
+                                                  <i class="far fa-circle nav-icon"></i>
+                                                  <p>{{$item_sub_menu->name}}</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    @endif
+                                @endforeach
+                            @endif
                         </li>
                     @endif
                 @endforeach

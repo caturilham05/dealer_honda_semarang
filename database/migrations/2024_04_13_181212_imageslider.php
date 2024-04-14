@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menu', function (Blueprint $table) {
+        Schema::create('imageslider', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('par_id')->unsigned()->default(0);
-            $table->index('par_id');
-            $table->string('name');
-            $table->string('route');
-            $table->string('prefix');
-            $table->integer('ordering')->default(0);
-            $table->tinyInteger('is_admin')->unsigned()->default(0);
+            $table->bigInteger('cat_id')->unsigned();
+            $table->index('cat_id');
+            $table->foreign('cat_id')->references('id')->on('imageslider_category')->onUpdate('cascade')->onDelete('cascade');
+            $table->text('image');
+            $table->text('images');
             $table->tinyInteger('is_active')->unsigned()->default(0);
             $table->timestamps();
         });

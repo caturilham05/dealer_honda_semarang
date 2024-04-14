@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
  
         View::composer('*', function($view)
         {
-            $menu = Menu::orderBy('ordering')->where('is_active', 1)->get();
+            $menu = Menu::with(['sub_menu'])->where('is_active', 1)->where('par_id', 0)->orderBy('ordering')->get();
             $view->with('menu', $menu);
         });
     }

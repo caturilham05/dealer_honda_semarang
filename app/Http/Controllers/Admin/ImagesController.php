@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProductsType;
+use App\Models\Images;
 use Illuminate\Http\Request;
 
-class ProductsTypeController extends Controller
+class ImagesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,16 @@ class ProductsTypeController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Tipe Produk'
+            'title' => 'Images',
+        ];
+
+        return view('admin.dashboard', $data);
+    }
+
+    public function imageslider()
+    {
+        $data = [
+            'title' => 'Imageslider'
         ];
 
         return view('admin.dashboard', $data);
@@ -39,7 +48,7 @@ class ProductsTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductsType $productsType)
+    public function show(Images $images)
     {
         //
     }
@@ -47,7 +56,7 @@ class ProductsTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductsType $productsType)
+    public function edit(Images $images)
     {
         //
     }
@@ -55,7 +64,7 @@ class ProductsTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductsType $productsType)
+    public function update(Request $request, Images $images)
     {
         //
     }
@@ -63,7 +72,7 @@ class ProductsTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductsType $productsType)
+    public function destroy(Images $images)
     {
         //
     }

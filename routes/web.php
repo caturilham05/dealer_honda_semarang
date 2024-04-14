@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CreditTermsController;
 use App\Http\Controllers\Admin\ContactsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\ImagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,12 +29,33 @@ Route::post('/admin/logout', [AuthController::class, 'logout']);
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
     Route::get('/admin/products', [ProductsController::class, 'index'])->name('admin.products');
-    Route::get('/admin/products-type', [ProductsTypeController::class, 'index'])->name('admin.products_type');
-    Route::get('/admin/promo', [PromoController::class, 'index'])->name('admin.promo');
+    Route::get('/admin/products/products-list', [ProductsController::class, 'index'])->name('admin.products_list');
+    Route::get('/admin/products/products-list/create', [ProductsController::class, 'product_create'])->name('admin.products.create');
+    Route::post('/admin/products/products-list/create', [ProductsController::class, 'product_store'])->name('admin.products.store');
+
+    Route::get('/admin/products/products-type', [ProductsController::class, 'product_type'])->name('admin.products_type');
+    Route::get('/admin/products/products-type/create', [ProductsController::class, 'product_type_create'])->name('admin.products.product_type_create');
+    Route::post('/admin/products/products-type/create', [ProductsController::class, 'product_type_store'])->name('admin.products.product_type_store');
+
+    Route::get('/admin/products/promo', [ProductsController::class, 'product_promo'])->name('admin.products.promo');
+    Route::get('/admin/products/promo/create', [ProductsController::class, 'product_promo_create'])->name('admin.products.promo_create');
+    Route::post('/admin/products/promo/create', [ProductsController::class, 'product_promo_store'])->name('admin.products.promo_store');
+    Route::get('/admin/products/promo/edit/{id}', [ProductsController::class, 'edit_promo'])->name('admin.products.promo_edit');
+    Route::put('/admin/products/promo/edit/{id}', [ProductsController::class, 'update_promo'])->name('admin.products.promo_update');
+    Route::put('/admin/products/promo/edit/{id}/set-active', [ProductsController::class, 'update_promo_active'])->name('admin.products.promo_update_active');
+    Route::delete('/admin/products/promo/{id}', [ProductsController::class, 'destroy_promo'])->name('admin.products.promo_destroy');
+
     Route::get('/admin/credit', [CreditTermsController::class, 'index'])->name('admin.credit');
+
     Route::get('/admin/contact', [ContactsController::class, 'index'])->name('admin.contact');
+
     Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user');
+    
+    Route::get('/admin/images', [ImagesController::class, 'index'])->name('admin.images');
+    Route::get('/admin/images', [ImagesController::class, 'index'])->name('admin.images');
+    Route::get('/admin/images/imageslider', [ImagesController::class, 'imageslider'])->name('admin.imageslider');
 
     /*Settings*/
     Route::get('/admin/navbars', [SettingsController::class, 'index'])->name('admin.navbars');

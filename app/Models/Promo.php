@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Promo extends Model
 {
     use HasFactory;
+    protected $table = 'promo';
+    protected $fillable = [
+        'name',
+        'description',
+        'image',
+        'images',
+        'is_active'
+    ];
+    protected $casts = [
+        'images' => 'array'
+    ];
 }

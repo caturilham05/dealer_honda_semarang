@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menu', function (Blueprint $table) {
+        Schema::create('contact', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('par_id')->unsigned()->default(0);
-            $table->index('par_id');
-            $table->string('name');
-            $table->string('route');
-            $table->string('prefix');
-            $table->integer('ordering')->default(0);
-            $table->tinyInteger('is_admin')->unsigned()->default(0);
+            $table->string('whatsapp_number');
+            $table->text('social_media')->nullable();
             $table->tinyInteger('is_active')->unsigned()->default(0);
             $table->timestamps();
         });

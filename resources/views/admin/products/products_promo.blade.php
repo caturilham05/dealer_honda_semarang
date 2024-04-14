@@ -9,7 +9,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('admin.navbars')}}">{{$title}}</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.products.promo')}}">{{$title}}</a></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -27,8 +27,8 @@
       </div>
   @endif
 
-  <a href="{{route('admin.navbars.create')}}">
-    <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-plus"></i>&nbsp;&nbsp; Buat Menu</button>
+  <a href="{{route('admin.products.promo_create')}}">
+    <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-plus"></i>&nbsp;&nbsp; Buat Promo</button>
   </a>
 
   <div class="row">
@@ -39,44 +39,58 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          @if ($menus->isEmpty())
+          @if ($promos->isEmpty())
             <center>
-              <span>Data tidak ditemukan</span>
+              <span>Promo tidak ditemukan</span>
             </center>
           @else            
             <table class="table table-bordered table-responsive">
               <thead>
                 <tr>
-                  <th>Nama Menu</th>
-                  <th>Prefix</th>
-                  <th>Prefix URL</th>
-                  <th>Urutan Menu</th>
-                  <th>Tampil</th>
+                  <th>Nama Promo</th>
+                  <th>Deskripsi Promo</th>
+                  <th>Foto</th>
                   <th>Aktif / Tidak Aktif</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($menus as $item)
-                    @if ($item->prefix != 'navbars')                    
-                        <tr>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->prefix}}</td>
-                            <td>{{$item->route}}</td>
-                            <td>{{$item->ordering}}</td>
-                            <td>{{$item->is_admin == 2 ? 'Tampil di admin dan publik' : ($item->is_admin == 1 ? 'Tampil di admin' : ($item->is_admin == 0 ? 'Tampil di publik' : '-'))}}</td>
-                            <td style="width: 10%;">
-                              <input type="checkbox" name="is_active" value="{{$item->is_active}}" data-id="{{$item->id}}" class="checkbox" {{$item->is_active == 1 ? 'checked' : ''}}>
-                            </td>
-                        </tr>
-                    @endif
+                @foreach ($promos as $item)
+                	@php
+                		$text = substr($item->description, 0, 10);
+                		$end  = strrpos($text, '...');
+                	@endphp
+                  <tr>
+                      <td width="20%">{{$item->name}}</td>
+                      <td width="30%">{{substr_replace($item->description, ' ...', 50)}}</td>
+                      <td>
+                        @if (!empty($item->image))
+                          <img src="{{ asset('/storage/promo/'.$item->image) }}" style="width: 150px">
+                        @else
+                          -
+                        @endif
+                      </td>
+                      <td>
+                          <input type="checkbox" name="is_active" value="{{$item->is_active}}" data-id="{{$item->id}}" class="checkbox" {{$item->is_active == 1 ? 'checked' : ''}}>
+                          <label class="form-check-label" for="is_active">{{!empty($item->is_active) ? 'Aktif' : 'Tidak Aktif'}}</label>
+                      </td>
+                      <td class="text-center">
+                          <form onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data {{$item->name}} ?');" action="{{ route('admin.products.promo_destroy', $item->id) }}" method="POST">
+                              <a href="{{ route('admin.products.promo_update', $item->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                          </form>
+                      </td>
+                  </tr>
                 @endforeach
               </tbody>
             </table>
           @endif
         </div>
-        @if (!$menus->isEmpty())
+        @if (!$promos->isEmpty())
             <div class="card-footer clearfix">
-            {!! $menus->withQueryString()->links('pagination::bootstrap-5') !!}
+            {!! $promos->withQueryString()->links('pagination::bootstrap-5') !!}
             </div>
         @endif
         <!-- /.card-body -->
@@ -96,7 +110,7 @@
                 isChecked = 1
             }
             $.ajax({
-                url: `/admin/navbars/create/${id}`,
+                url: `/admin/products/promo/edit/${id}/set-active`,
                 type: 'PUT',
                 data: {
                     _token: "{{csrf_token()}}",
@@ -115,3 +129,4 @@
     })
 </script>
 @endsection
+

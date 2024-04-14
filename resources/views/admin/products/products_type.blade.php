@@ -9,7 +9,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('admin.navbars')}}">{{$title}}</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.products_type')}}">{{$title}}</a></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -27,8 +27,8 @@
       </div>
   @endif
 
-  <a href="{{route('admin.navbars.create')}}">
-    <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-plus"></i>&nbsp;&nbsp; Buat Menu</button>
+  <a href="{{route('admin.products.product_type_create')}}">
+    <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-plus"></i>&nbsp;&nbsp; Buat Tipe Produk</button>
   </a>
 
   <div class="row">
@@ -39,7 +39,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          @if ($menus->isEmpty())
+          @if ($product_types->isEmpty())
             <center>
               <span>Data tidak ditemukan</span>
             </center>
@@ -47,25 +47,22 @@
             <table class="table table-bordered table-responsive">
               <thead>
                 <tr>
-                  <th>Nama Menu</th>
-                  <th>Prefix</th>
-                  <th>Prefix URL</th>
-                  <th>Urutan Menu</th>
-                  <th>Tampil</th>
+                  <th>Tipe Mobil</th>
+                  <th>Harga Mobil</th>
+                  <th>Tahun</th>
                   <th>Aktif / Tidak Aktif</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($menus as $item)
+                @foreach ($product_types as $item)
                     @if ($item->prefix != 'navbars')                    
                         <tr>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->prefix}}</td>
-                            <td>{{$item->route}}</td>
-                            <td>{{$item->ordering}}</td>
-                            <td>{{$item->is_admin == 2 ? 'Tampil di admin dan publik' : ($item->is_admin == 1 ? 'Tampil di admin' : ($item->is_admin == 0 ? 'Tampil di publik' : '-'))}}</td>
-                            <td style="width: 10%;">
-                              <input type="checkbox" name="is_active" value="{{$item->is_active}}" data-id="{{$item->id}}" class="checkbox" {{$item->is_active == 1 ? 'checked' : ''}}>
+                            <td width="15%">{{$item->name}}</td>
+                            <td width="20%">{{$item->price}}</td>
+                            <td width="20%">{{$item->years}}</td>
+                            <td width="10%">
+                                <input type="checkbox" name="is_active" value="{{$item->is_active}}" data-id="{{$item->id}}" class="checkbox" {{$item->is_active == 1 ? 'checked' : ''}}>
+                                <label class="form-check-label" for="is_active">{{!empty($item->is_active) ? 'Aktif' : 'Tidak Aktif'}}</label>
                             </td>
                         </tr>
                     @endif
@@ -74,9 +71,9 @@
             </table>
           @endif
         </div>
-        @if (!$menus->isEmpty())
+        @if (!$product_types->isEmpty())
             <div class="card-footer clearfix">
-            {!! $menus->withQueryString()->links('pagination::bootstrap-5') !!}
+            {!! $product_types->withQueryString()->links('pagination::bootstrap-5') !!}
             </div>
         @endif
         <!-- /.card-body -->
@@ -115,3 +112,4 @@
     })
 </script>
 @endsection
+
