@@ -30,14 +30,24 @@ Route::post('/admin/logout', [AuthController::class, 'logout']);
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+    /*PRODUCTS*/
     Route::get('/admin/products', [ProductsController::class, 'index'])->name('admin.products');
     Route::get('/admin/products/products-list', [ProductsController::class, 'index'])->name('admin.products_list');
+    Route::get('/admin/products/products-list/detail/{id}', [ProductsController::class, 'show_product'])->name('admin.products.products_detail');
     Route::get('/admin/products/products-list/create', [ProductsController::class, 'product_create'])->name('admin.products.create');
     Route::post('/admin/products/products-list/create', [ProductsController::class, 'product_store'])->name('admin.products.store');
+    Route::get('/admin/products/products-list/edit/{id}', [ProductsController::class, 'edit_product'])->name('admin.products.edit_product');
+    Route::put('/admin/products/products-list/edit/{id}', [ProductsController::class, 'update_product'])->name('admin.products.update_product');
+    Route::put('/admin/products/products-list/edit/{id}/set-active', [ProductsController::class, 'update_product_active'])->name('admin.products.update_product_active');
+    Route::delete('/admin/products/products-list/{id}', [ProductsController::class, 'destroy_product'])->name('admin.products.product_destroy');
 
     Route::get('/admin/products/products-type', [ProductsController::class, 'product_type'])->name('admin.products_type');
     Route::get('/admin/products/products-type/create', [ProductsController::class, 'product_type_create'])->name('admin.products.product_type_create');
     Route::post('/admin/products/products-type/create', [ProductsController::class, 'product_type_store'])->name('admin.products.product_type_store');
+    Route::get('/admin/products/products-type/edit/{id}', [ProductsController::class, 'edit_product_type'])->name('admin.products.product_type_edit');
+    Route::put('/admin/products/products-type/edit/{id}', [ProductsController::class, 'update_product_type'])->name('admin.products.product_type_update');
+    Route::put('/admin/products/products-type/edit/{id}/set-active', [ProductsController::class, 'update_product_type_active'])->name('admin.products.update_product_type_active');
+    Route::delete('/admin/products/products-type/{id}', [ProductsController::class, 'destroy_product_type'])->name('admin.products.product_type_destroy');
 
     Route::get('/admin/products/promo', [ProductsController::class, 'product_promo'])->name('admin.products.promo');
     Route::get('/admin/products/promo/create', [ProductsController::class, 'product_promo_create'])->name('admin.products.promo_create');
@@ -46,6 +56,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/admin/products/promo/edit/{id}', [ProductsController::class, 'update_promo'])->name('admin.products.promo_update');
     Route::put('/admin/products/promo/edit/{id}/set-active', [ProductsController::class, 'update_promo_active'])->name('admin.products.promo_update_active');
     Route::delete('/admin/products/promo/{id}', [ProductsController::class, 'destroy_promo'])->name('admin.products.promo_destroy');
+    /*PRODUCTS*/
 
     Route::get('/admin/credit', [CreditTermsController::class, 'index'])->name('admin.credit');
 

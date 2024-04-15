@@ -8,4 +8,32 @@ use Illuminate\Database\Eloquent\Model;
 class Products extends Model
 {
     use HasFactory;
+
+    protected $table = 'products';
+    protected $fillable = [
+        'product_type_id',
+        'promo_id',
+        'name',
+        'price',
+        'specification',
+        'special_feature',
+        'description',
+        'image',
+        'images',
+        'is_active'
+    ];
+
+    protected $casts = [
+        'images' => 'array'
+    ];
+
+    public function product_type()
+    {
+        return $this->hasOne(ProductsType::class, 'id', 'product_type_id');
+    }
+
+    public function promo()
+    {
+        return $this->hasOne(Promo::class, 'id', 'promo_id');
+    }
 }

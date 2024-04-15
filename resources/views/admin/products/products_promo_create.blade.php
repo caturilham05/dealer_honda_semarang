@@ -36,22 +36,12 @@
             <div class="form-group">
               <label for="description">Deskripsi Promo</label>
               <textarea class="form-control" rows="3" name="description" placeholder="Deskripsi Promo"></textarea>
-              {{-- @error('description')
-                  <div class="alert alert-danger mt-2">
-                      {{ $message }}
-                  </div>
-              @enderror --}}
             </div>
             <div class="form-group">
               <label for="images">Unggah Gambar</label>
               <div class="col-md-6">
                 <input type="file" class="form-control" name="images[]" multiple>
               </div>
-              {{-- @error('images')
-                <div class="alert alert-danger mt-2">
-                  {{ $message }}
-                </div>
-              @enderror --}}
             </div>
 						<div class="form-check">
 							<input type="checkbox" name="is_active" class="form-check-input" id="is_active">

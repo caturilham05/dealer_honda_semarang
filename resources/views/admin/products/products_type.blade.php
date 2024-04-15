@@ -28,7 +28,7 @@
   @endif
 
   <a href="{{route('admin.products.product_type_create')}}">
-    <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-plus"></i>&nbsp;&nbsp; Buat Tipe Produk</button>
+    <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-plus"></i>&nbsp;&nbsp; Buat {{$title}}</button>
   </a>
 
   <div class="row">
@@ -51,21 +51,28 @@
                   <th>Harga Mobil</th>
                   <th>Tahun</th>
                   <th>Aktif / Tidak Aktif</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($product_types as $item)
-                    @if ($item->prefix != 'navbars')                    
-                        <tr>
-                            <td width="15%">{{$item->name}}</td>
-                            <td width="20%">{{$item->price}}</td>
-                            <td width="20%">{{$item->years}}</td>
-                            <td width="10%">
-                                <input type="checkbox" name="is_active" value="{{$item->is_active}}" data-id="{{$item->id}}" class="checkbox" {{$item->is_active == 1 ? 'checked' : ''}}>
-                                <label class="form-check-label" for="is_active">{{!empty($item->is_active) ? 'Aktif' : 'Tidak Aktif'}}</label>
-                            </td>
-                        </tr>
-                    @endif
+                    <tr>
+                        <td width="15%">{{$item->name}}</td>
+                        <td width="20%">{{$item->price}}</td>
+                        <td width="20%">{{$item->years}}</td>
+                        <td width="10%">
+                            <input type="checkbox" name="is_active" value="{{$item->is_active}}" data-id="{{$item->id}}" class="checkbox" {{$item->is_active == 1 ? 'checked' : ''}}>
+                            <label class="form-check-label" for="is_active">{{!empty($item->is_active) ? 'Aktif' : 'Tidak Aktif'}}</label>
+                        </td>
+                        <td class="text-center" width="20%">
+                          <form onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data {{$item->name}} ?');" action="{{ route('admin.products.product_type_destroy', $item->id) }}" method="POST">
+                              <a href="{{ route('admin.products.product_type_edit', $item->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                          </form>
+                        </td>
+                    </tr>
                 @endforeach
               </tbody>
             </table>
@@ -93,7 +100,7 @@
                 isChecked = 1
             }
             $.ajax({
-                url: `/admin/navbars/create/${id}`,
+                url: `/admin/products/products-type/edit/${id}/set-active`,
                 type: 'PUT',
                 data: {
                     _token: "{{csrf_token()}}",

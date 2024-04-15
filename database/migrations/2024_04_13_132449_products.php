@@ -20,6 +20,7 @@ return new class extends Migration
             $table->index('promo_id');
             $table->foreign('promo_id')->references('id')->on('promo')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
+            $table->float('price', 22,2)->unsigned();
             $table->text('specification')->nullable();
             $table->text('special_feature')->nullable();
             $table->text('description')->nullable();

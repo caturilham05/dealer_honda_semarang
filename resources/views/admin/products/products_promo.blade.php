@@ -56,10 +56,6 @@
               </thead>
               <tbody>
                 @foreach ($promos as $item)
-                	@php
-                		$text = substr($item->description, 0, 10);
-                		$end  = strrpos($text, '...');
-                	@endphp
                   <tr>
                       <td width="20%">{{$item->name}}</td>
                       <td width="30%">{{substr_replace($item->description, ' ...', 50)}}</td>

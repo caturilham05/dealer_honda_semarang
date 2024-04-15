@@ -21,8 +21,9 @@
     <div class="card">
         <!-- /.card-header -->
         <!-- form start -->
-        <form action="{{route('admin.products.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('admin.products.update_product', $product['id'])}}" method="POST" enctype="multipart/form-data">
           @csrf
+          @method('PUT')
           <div class="card-body">
             @if ($product_types->isEmpty())
               <div class="mb-3">
@@ -35,7 +36,8 @@
                 <select class="form-control @error('product_type_id') is-invalid @enderror" name="product_type_id">
                   <option value="">Pilih Tipe Mobil</option>
                   @foreach ($product_types as $item)
-                    <option value="{{$item->id}}">{{$item->name}}</option>
+                    <option value="{{$item->id}}" {{ ( $item->id == $product->product_type_id) ? 'selected' : '' }}>{{$item->name}}</option>
+
                   @endforeach
                 </select>
                 @error('product_type_id')
@@ -58,7 +60,7 @@
                 <select class="form-control" name="promo_id">
                   <option value="">Pilih Promo</option>
                   @foreach ($promos as $item)
-                    <option value="{{$item->id}}">{{$item->name}}</option>
+                    <option value="{{$item->id}}" {{ ( $item->id == $product->promo_id) ? 'selected' : '' }}>{{$item->name}}</option>
                   @endforeach
                 </select>
                 <span><a href="{{route('admin.products.promo_create')}}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah promo baru</a></span>
@@ -67,7 +69,7 @@
 
             <div class="form-group">
               <label for="name">Nama Mobil</label>
-              <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama Mobil">
+              <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{old('name', $product['name'])}}" placeholder="Nama Mobil">
               @error('name')
                   <div class="alert alert-danger mt-2">
                       {{ $message }}
@@ -77,17 +79,17 @@
 
             <div class="form-group">
               <label for="specification">Spesifikasi Mobil</label>
-              <textarea class="form-control" rows="3" name="specification" placeholder="Spesifikasi Mobil"></textarea>
+              <textarea class="form-control" rows="3" name="specification" placeholder="Spesifikasi Mobil">{{old('specification', $product['specification'])}}</textarea>
             </div>
 
             <div class="form-group">
               <label for="special_feature">Fitur Spesial</label>
-              <textarea class="form-control" rows="3" name="special_feature" placeholder="Fitur Spesial"></textarea>
+              <textarea class="form-control" rows="3" name="special_feature" placeholder="Fitur Spesial">{{old('special_feature', $product['special_feature'])}}</textarea>
             </div>
 
             <div class="form-group">
               <label for="description">Deskripsi Mobil</label>
-              <textarea class="form-control" rows="3" name="description" placeholder="Deskripsi Mobil"></textarea>
+              <textarea class="form-control" rows="3" name="description" placeholder="Deskripsi Mobil">{{old('description', $product['description'])}}</textarea>
             </div>
 
             <div class="form-group">
@@ -98,7 +100,7 @@
             </div>
 
             <div class="form-check">
-              <input type="checkbox" name="is_active" class="form-check-input" id="is_active">
+              <input type="checkbox" name="is_active" class="form-check-input" id="is_active" {{!empty($product->is_active) ? 'checked' : ''}}>
               <label class="form-check-label" for="is_active">Aktif / Tidak Aktif</label>
             </div>
 
