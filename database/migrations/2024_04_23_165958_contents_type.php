@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('content_type', function (Blueprint $table) {
             $table->id();
             $table->text('title');
-            $table->tinyInteger('is_active')->unsigned()->nullable();
+            $table->tinyInteger('is_active')->unsigned()->default(0);
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->string('create_by_name', 255)->nullable();
             $table->dateTime('modifed')->nullable();

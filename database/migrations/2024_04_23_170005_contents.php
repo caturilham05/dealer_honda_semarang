@@ -27,7 +27,7 @@ return new class extends Migration
             $table->bigInteger('created_by')->unsigned();
             $table->string('create_by_name', 255)->nullable();
             $table->dateTime('modifed')->nullable();
-            $table->tinyInteger('ordering',4)->unsigned()->default(0)->nullable();
+            $table->tinyInteger('ordering')->unsigned()->default(0)->nullable();
             $table->timestamps();
         });
     }
