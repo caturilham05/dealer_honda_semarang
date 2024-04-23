@@ -8,6 +8,7 @@ use App\Models\ProductsType;
 use App\Models\Promo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\Helper;
 
 class ProductsController extends Controller
 {
@@ -95,13 +96,18 @@ class ProductsController extends Controller
         $this->validate($request,[
                 'product_type_id' => 'required|integer',
                 'name'            => 'required',
+                'price'           => 'required',
             ],
             [
-                'name.required'            => 'Nama menu tidak boleh kosong',
-                'product_type_id.required' => 'Tipe produk tidak boleh kosong',
-                'product_type_id.integer'  => 'Tipe produk harus berupa angka',
+                'name.required'            => 'Nama mobil tidak boleh kosong',
+                'price.required'           => 'Harga mobil tidak boleh kosong',
+                'product_type_id.required' => 'Tipe mobil tidak boleh kosong',
+                'product_type_id.integer'  => 'Tipe mobil harus berupa angka',
             ]
         );
+
+        $request->price = str_replace('.', '', $request->price);
+        $request->price = $request->price;
 
         if ($request->hasFile('images'))
         {
@@ -121,6 +127,7 @@ class ProductsController extends Controller
             'product_type_id' => $request->product_type_id,
             'promo_id'        => $request->promo_id,
             'name'            => $request->name,
+            'price'           => $request->price,
             'specification'   => $request->specification,
             'special_feature' => $request->special_feature,
             'description'     => $request->description,

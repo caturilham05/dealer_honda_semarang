@@ -7,11 +7,13 @@
 	    	@endphp
     	</pre> --}}
     	<center>
-    		<h1>{{$item->name}}</h1>
+    		<div class="container m-3">
+	    		<h1 style="text-transform: uppercase;">{{$item->name}} ({{Helper::helper_number_format($item->price)}})</h1>
+    		</div>
     		<hr>
     	</center>
     	<div class="container">
-    		<h4>Tipe Mobil</h4>
+    		<h4>TIPE MOBIL</h4>
 	      <table class="table table-bordered">
 	        <thead>
 	          <tr>
@@ -23,14 +25,14 @@
 	        <tbody>
 	        	<tr>
 	        		<td>{{$item->product_type->name}}</td>
-	        		<td>Rp. {{number_format($item->product_type->price,2,',','.')}}</td>
+	        		<td>Rp.{{Helper::helper_number_format($item->product_type->price)}}</td>
 	        		<td>{{$item->product_type->years}}</td>
 	        	</tr>
 	        </tbody>
 	      </table>
     	</div>
     	<div class="container">
-    		<h4>Promo</h4>
+    		<h4>PROMO</h4>
     		@if (!empty($item->promo))
 		      <table class="table table-bordered">
 		        <thead>
@@ -58,8 +60,36 @@
 		        </tbody>
 		      </table>
     		@else
-    		<center><span>Mobil ini tidak memiliki promo</span></center>
+	    		<center><span>Mobil ini tidak memiliki promo</span></center>
     		@endif
+    		<hr>
+    	</div>
+    	<div class="container">
+    		@if (!empty($item->images))
+		    	<div style="display: flex; flex-wrap: wrap;">
+		    		@foreach ($item->images as $value)
+							<div class="card" style="width: 15rem; margin: 0.5rem;">
+							  <img class="card-img-top" src="{{ asset('/storage/products/'.$value['images']) }}" alt="{{$value['images']}}">
+							</div>	    			
+		    		@endforeach
+		    	</div>
+    		@endif
+    		<div class="container mt-4">
+    			<div class="row">
+    				<div class="col-md-4">
+    					<h4>SPESIFIKASI</h4>
+			    		<span>{!! Helper::helper_nl2br($item->specification) ?? '-' !!}</span>
+    				</div>
+    				<div class="col-md-4">
+    					<h4>FITUR SPESIAL</h4>
+			    		<span>{!! Helper::helper_nl2br($item->special_feature) ?? '-' !!}</span>
+    				</div>
+    				<div class="col-md-4">
+    					<h4>DESKRIPSI</h4>
+			    		<span>{!! Helper::helper_nl2br($item->description) ?? '-' !!}</span>
+    				</div>
+    			</div>
+    		</div>
     	</div>
     </div>
   </div>

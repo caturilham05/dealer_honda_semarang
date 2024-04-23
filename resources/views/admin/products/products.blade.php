@@ -39,21 +39,22 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                @include('admin.products.partials.products_filter')
               @if ($products->isEmpty())
                 <center>
                   <span>Produk tidak ditemukan</span>
                 </center>
-              @else            
+              @else
+                @include('admin.products.partials.products_filter')
                 <table class="table table-bordered table-responsive">
                   <thead>
                     <tr>
                       <th>Nama Mobil</th>
                       <th>Tipe Mobil</th>
+                      <th>Harga Mobil</th>
                       <th>Promo</th>
                       <th>Spesifikasi</th>
-                      <th>Fitur Spesial</th>
-                      <th>Deskripsi</th>
+                      {{-- <th>Fitur Spesial</th> --}}
+                      {{-- <th>Deskripsi</th> --}}
                       <th>Foto Mobil</th>
                       <th>Aktif / Tidak Aktif</th>
                       <th>Aksi</th>
@@ -73,10 +74,11 @@
                                 {{-- <a href="{{ route('admin.products.products_detail', $item->id) }}" data-bs-toggle="modal" data-bs-target="#modal-xl">{{$item->name}}</a> --}}
                             </td>
                             <td>{{$item->product_type->name}}</td>
+                            <td>Rp.{{Helper::helper_number_format($item->price)}}</td>
                             <td>{{$item->promo->name ?? '-'}}</td>
-                            <td>{!! nl2br(e($specification)) ?? '-' !!}</td>
-                            <td>{!! nl2br(e($special_feature)) ?? '-' !!}</td>
-                            <td>{!! nl2br(e($description)) ?? '-' !!}</td>
+                            <td>{!! Helper::helper_nl2br($specification) ?? '-' !!}</td>
+                            {{-- <td>{!! nl2br(e($special_feature)) ?? '-' !!}</td> --}}
+                            {{-- <td>{!! nl2br(e($description)) ?? '-' !!}</td> --}}
                             <td>
                                 @if (!empty($item->image))
                                   <img src="{{ asset('/storage/products/'.$item->image) }}" style="width: 150px">

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ContactsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\ImagesController;
+use App\Http\Controllers\Admin\ContentTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,15 @@ Route::post('/admin/logout', [AuthController::class, 'logout']);
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/dashboard/content/create', [DashboardController::class, 'create'])->name('admin.dashboard.create');
+
+    Route::get('/admin/content-type', [ContentTypeController::class, 'index'])->name('admin.content_type');
+    Route::get('/admin/content-type/create', [ContentTypeController::class, 'create'])->name('admin.content_type.create');
+    Route::post('/admin/content-type/create', [ContentTypeController::class, 'store'])->name('admin.content_type.store');
+    Route::get('/admin/content-type/edit/{id}', [ContentTypeController::class, 'edit'])->name('admin.content_type.edit');
+    Route::put('/admin/content-type/edit/{id}', [ContentTypeController::class, 'update'])->name('admin.content_type.update');
+    Route::put('/admin/content-type/edit/{id}/set-active', [ContentTypeController::class, 'update_content_type_active'])->name('admin.content_type.update_content_type_active');
+    Route::delete('/admin/content-type/{id}', [ContentTypeController::class, 'destroy'])->name('admin.content_type.destroy');
 
     /*PRODUCTS*/
     Route::get('/admin/products', [ProductsController::class, 'index'])->name('admin.products');

@@ -24,30 +24,7 @@
         <form action="{{route('admin.products.store')}}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="card-body">
-            @if ($product_types->isEmpty())
-              <div class="mb-3">
-                <span style="color: red;"><b>tipe Mobil tidak ditemukan. Silahkan tambah tipe Mobil terlebih dahulu</b></span>
-                <a href="{{route('admin.products.product_type_create')}}" style="text-decoration: underline;"> Tambah tipe Mobil</a>
-              </div>
-            @else
-              <div class="form-group">
-                <label>Tipe Mobil</label>
-                <select class="form-control @error('product_type_id') is-invalid @enderror" name="product_type_id">
-                  <option value="">Pilih Tipe Mobil</option>
-                  @foreach ($product_types as $item)
-                    <option value="{{$item->id}}">{{$item->name}}</option>
-                  @endforeach
-                </select>
-                @error('product_type_id')
-                    <div class="alert alert-danger mt-2">
-                        {{ $message }}
-                    </div>
-                @enderror
-                <span><a href="{{route('admin.products.product_type_create')}}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah tipe Mobil baru</a></span>
-              </div>
-            @endif
-
-            @if ($promos->isEmpty())
+            {{-- @if ($promos->isEmpty())
               <div class="mb-3">
                 <span style="color: red;"><b>promo tidak ditemukan. Silahkan tambah promo terlebih dahulu</b></span>
                 <a href="{{route('admin.products.promo_create')}}" style="text-decoration: underline;"> Tambah promo baru</a>
@@ -63,7 +40,7 @@
                 </select>
                 <span><a href="{{route('admin.products.promo_create')}}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah promo baru</a></span>
               </div>
-            @endif
+            @endif --}}
 
             <div class="form-group">
               <label for="name">Nama Mobil</label>
@@ -115,25 +92,11 @@
           </div>
           <!-- /.card-body -->
 
-          <div class="card-footer">
+          {{-- <div class="card-footer">
             @if (!$product_types->isEmpty())
               <button type="submit" class="btn btn-primary">Submit</button>
             @endif
-          </div>
+          </div> --}}
         </form>
     </div>
-@endsection
-
-@section('script')
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('body').on('keyup', '#price', function(event) {
-      if(event.which >= 37 && event.which <= 40) return;
-      // format number
-      $(this).val(function(index, value) {
-        return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      });
-    });
-  })
-</script>
 @endsection
