@@ -31,6 +31,11 @@ Route::post('/admin/logout', [AuthController::class, 'logout']);
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/dashboard/content/create', [DashboardController::class, 'create'])->name('admin.dashboard.create');
+    Route::post('/admin/dashboard/content/create', [DashboardController::class, 'store'])->name('admin.dashboard.store');
+    Route::get('/admin/dashboard/content/edit/{id}', [DashboardController::class, 'edit'])->name('admin.dashboard.edit');
+    Route::put('/admin/dashboard/content/edit/{id}', [DashboardController::class, 'update'])->name('admin.dashboard.update');
+    Route::put('/admin/dashboard/content/edit/{id}/set-active', [DashboardController::class, 'update_content_active'])->name('admin.dashboard.update_content_active');
+    Route::delete('/admin/dashboard/{id}', [DashboardController::class, 'destroy'])->name('admin.dashboard.destroy');
 
     Route::get('/admin/content-type', [ContentTypeController::class, 'index'])->name('admin.content_type');
     Route::get('/admin/content-type/create', [ContentTypeController::class, 'create'])->name('admin.content_type.create');

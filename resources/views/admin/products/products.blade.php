@@ -44,7 +44,7 @@
                   <span>Produk tidak ditemukan</span>
                 </center>
               @else
-                @include('admin.products.partials.products_filter')
+                @include('admin.partials.product_filter')
                 <table class="table table-bordered table-responsive">
                   <thead>
                     <tr>
@@ -145,4 +145,3 @@
     })
 </script>
 @endsection
-

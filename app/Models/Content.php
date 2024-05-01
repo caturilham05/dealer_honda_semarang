@@ -16,6 +16,7 @@ class Content extends Model
         'keyword',
         'tags',
         'intro',
+        'content',
         'image',
         'images',
         'is_active',
@@ -24,7 +25,7 @@ class Content extends Model
         'modified'
     ];
 
-    protected $cast = [
+    protected $casts = [
         'images' => 'array'
     ];
 

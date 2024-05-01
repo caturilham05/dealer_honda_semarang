@@ -21,10 +21,11 @@ return new class extends Migration
             $table->text('keyword')->nullable();
             $table->text('tags')->nullable();
             $table->text('intro')->nullable();
+            $table->text('content')->nullable();
             $table->text('image')->nullable();
             $table->text('images')->nullable();
             $table->tinyInteger('is_active')->unsigned()->default(0);
-            $table->bigInteger('created_by')->unsigned();
+            $table->bigInteger('created_by')->unsigned()->nullable();
             $table->string('create_by_name', 255)->nullable();
             $table->dateTime('modifed')->nullable();
             $table->tinyInteger('ordering')->unsigned()->default(0)->nullable();

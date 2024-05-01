@@ -311,15 +311,15 @@ class ProductsController extends Controller
 
     public function update_product_active(Request $request, $id){
         if (request()->ajax()) {
-            $product_type            = Products::find($id);
-            $product_type->is_active = $request->is_checked;
-            if (!$product_type->update()) {
+            $product            = Products::find($id);
+            $product->is_active = $request->is_checked;
+            if (!$product->update()) {
                 return response()->json([
-                    'message' => 'Gagal mengaktifkan '.$request->name,
+                    'message' => 'Gagal mengaktifkan '.$product->name,
                 ]);
             }
             return response()->json([
-                    'message' => 'Berhasil mengaktifkan '.$request->name,
+                    'message' => 'Berhasil mengaktifkan '.$product->name,
             ]);
         }
     }
@@ -371,11 +371,11 @@ class ProductsController extends Controller
             $promo->is_active = $request->is_checked;
             if (!$promo->update()) {
                 return response()->json([
-                    'message' => 'Gagal mengaktifkan promo '.$request->name,
+                    'message' => 'Gagal mengaktifkan promo '.$promo->name,
                 ]);
             }
             return response()->json([
-                    'message' => 'Berhasil mengaktifkan promo '.$request->name,
+                    'message' => 'Berhasil mengaktifkan promo '.$promo->name,
             ]);
         }
     }
@@ -414,11 +414,11 @@ class ProductsController extends Controller
             $product_type->is_active = $request->is_checked;
             if (!$product_type->update()) {
                 return response()->json([
-                    'message' => 'Gagal mengaktifkan tipe '.$request->name,
+                    'message' => 'Gagal mengaktifkan tipe '.$product_type->name,
                 ]);
             }
             return response()->json([
-                'message' => 'Berhasil mengaktifkan tipe '.$request->name,
+                'message' => 'Berhasil mengaktifkan tipe '.$product_type->name,
             ]);
         }
     }

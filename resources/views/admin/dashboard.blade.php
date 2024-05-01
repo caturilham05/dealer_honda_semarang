@@ -47,17 +47,51 @@
                 <table class="table table-bordered table-responsive">
                   <thead>
                     <tr>
-                      <th>Nama Mobil</th>
-                      <th>Tipe Mobil</th>
-                      <th>Harga Mobil</th>
-                      <th>Promo</th>
-                      <th>Spesifikasi</th>
-                      <th>Foto Mobil</th>
+                      <th>Judul Konten</th>
+                      <th>Tipe Konten</th>
+                      <th>Keyword Konten</th>
+                      <th>Tags Konten</th>
+                      <th>Foto Konten</th>
                       <th>Aktif / Tidak Aktif</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ($contents as $item)
+                        @php
+                        $keyword = substr_replace($item->keyword, ' ...', 20);
+                        $tags    = substr_replace($item->tags, ' ...', 20);
+                        @endphp
+                      <tr>
+                        <td>
+                            <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg_{{$item->id}}">{!! $item->title !!}</a>
+                            @include('admin.content.dashboard_content_detail', ['item' => $item])
+                            {{-- <a href="{{ route('admin.products.products_detail', $item->id) }}" data-bs-toggle="modal" data-bs-target="#modal-xl">{{$item->name}}</a> --}}
+                        </td>
+                        <td>{{$item->content_type->title}}</td>
+                        <td>{!! Helper::helper_nl2br($keyword) ?? '-' !!}</td>
+                        <td>{!! Helper::helper_nl2br($tags) ?? '-' !!}</td>
+                        <td>
+                            @if (!empty($item->image))
+                              <img src="{{ asset('/storage/contents/'.$item->image) }}" style="width: 150px">
+                            @else
+                              -
+                            @endif
+                        </td>
+                        <td>
+                            <input type="checkbox" name="is_active" value="{{$item->is_active}}" data-id="{{$item->id}}" class="checkbox" {{$item->is_active == 1 ? 'checked' : ''}}>
+                            <label class="form-check-label" for="is_active">{{!empty($item->is_active) ? 'Aktif' : 'Tidak Aktif'}}</label>
+                        </td>
+                        <td class="text-center" width="20%">
+                          <form onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data {{$item->title}} ?');" action="{{ route('admin.dashboard.destroy', $item->id) }}" method="POST">
+                              <a href="{{ route('admin.dashboard.edit', $item->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                          </form>
+                        </td>
+                      </tr>
+                    @endforeach
                   </tbody>
                 </table>
               @endif
@@ -72,4 +106,35 @@
           <!-- /.card -->
         </div>
     </div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.checkbox').change(function(){
+            let id = $(this).data('id')
+            isChecked = 0
+            if (this.checked) {
+                isChecked = 1
+            }
+            $.ajax({
+                url: `/admin/dashboard/content/edit/${id}/set-active`,
+                type: 'PUT',
+                data: {
+                    _token: "{{csrf_token()}}",
+                    is_checked: isChecked
+                },
+                success:function(response){
+                  console.log(response)
+                    Swal.fire({
+                        icon: 'success',
+                        title: `${response.message}`,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+            })
+        })
+    })
+</script>
 @endsection
