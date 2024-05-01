@@ -93,6 +93,4 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 
 
-Route::get('/', function () {
-    return 'Public';
-});
+Route::get('/', [DashboardController::class, 'home'])->name('public.home');

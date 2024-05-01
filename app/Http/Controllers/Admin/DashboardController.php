@@ -22,6 +22,11 @@ class DashboardController extends Controller
         return view('admin.dashboard', $data);
     }
 
+    public function home()
+    {
+        return view('public.layout.public');
+    }
+
     public function create()
     {
         $content_type = ContentType::where('is_active', 1)->orderBy('id', 'desc')->get();
