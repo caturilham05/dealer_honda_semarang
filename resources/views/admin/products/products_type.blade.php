@@ -48,7 +48,7 @@
               <thead>
                 <tr>
                   <th>Tipe Mobil</th>
-                  <th>Harga Mobil</th>
+                  {{-- <th>Harga Mobil</th> --}}
                   <th>Tahun</th>
                   <th>Aktif / Tidak Aktif</th>
                   <th>Aksi</th>
@@ -58,7 +58,7 @@
                 @foreach ($product_types as $item)
                     <tr>
                         <td width="15%">{{$item->name}}</td>
-                        <td width="20%">{{$item->price}}</td>
+                        {{-- <td width="20%">{{$item->price}}</td> --}}
                         <td width="20%">{{$item->years}}</td>
                         <td width="10%">
                             <input type="checkbox" name="is_active" value="{{$item->is_active}}" data-id="{{$item->id}}" class="checkbox" {{$item->is_active == 1 ? 'checked' : ''}}>

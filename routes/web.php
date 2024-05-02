@@ -7,11 +7,13 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ProductsTypeController;
 use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\CreditTermsController;
-use App\Http\Controllers\Admin\ContactsController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Admin\ContentTypeController;
+
+use App\Http\Controllers\Public\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,13 +77,21 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/credit', [CreditTermsController::class, 'index'])->name('admin.credit');
 
-    Route::get('/admin/contact', [ContactsController::class, 'index'])->name('admin.contact');
-
     Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user');
     
     Route::get('/admin/images', [ImagesController::class, 'index'])->name('admin.images');
     Route::get('/admin/images', [ImagesController::class, 'index'])->name('admin.images');
     Route::get('/admin/images/imageslider', [ImagesController::class, 'imageslider'])->name('admin.imageslider');
+
+    /*Kontak*/
+    Route::get('/admin/contact', [ContactController::class, 'index'])->name('admin.contact');
+    Route::get('/admin/contact/create', [ContactController::class, 'create'])->name('admin.contact.create');
+    Route::post('/admin/contact/create', [ContactController::class, 'store'])->name('admin.contact.store');
+    Route::get('/admin/contact/edit/{id}', [ContactController::class, 'edit'])->name('admin.contact.edit');
+    Route::put('/admin/contact/edit/{id}', [ContactController::class, 'update'])->name('admin.contact.update');
+    Route::put('/admin/contact/edit/{id}/set-active', [ContactController::class, 'update_active'])->name('admin.contact.update_active');
+    Route::delete('/admin/contact/{id}', [ContactController::class, 'destroy'])->name('admin.contact.destroy');
+    /*Kontak*/
 
     /*Settings*/
     Route::get('/admin/navbars', [SettingsController::class, 'index'])->name('admin.navbars');
@@ -93,4 +103,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 
 
-Route::get('/', [DashboardController::class, 'home'])->name('public.home');
+Route::get('/', [HomeController::class, 'index'])->name('public.home');
+Route::get('/home', [HomeController::class, 'index'])->name('public.home');
+Route::get('/product', [DashboardController::class, 'home'])->name('public.product');
+Route::get('/product-list', [DashboardController::class, 'home'])->name('public.product-list');

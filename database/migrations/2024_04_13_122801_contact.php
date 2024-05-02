@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('contact', function (Blueprint $table) {
             $table->id();
             $table->string('whatsapp_number');
+            $table->text('address')->nullable();
             $table->text('social_media')->nullable();
+            $table->text('description')->nullable();
             $table->tinyInteger('is_active')->unsigned()->default(0);
             $table->timestamps();
         });

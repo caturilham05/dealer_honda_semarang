@@ -219,7 +219,7 @@
 
 /*** Booking ***/
 .booking {
-    background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(../img/carousel-bg-2.jpg) center center no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(../../logo/banner-contact.jpeg) center center no-repeat;
     background-size: cover;
 }
 

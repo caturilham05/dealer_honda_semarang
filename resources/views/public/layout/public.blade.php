@@ -3,10 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CarServ - Car Repair HTML Template</title>
+    <title>Dealer Honda Semarang</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="googlebot-news" content="index, follow">
 
     <!-- Favicon -->
     <link href="{{asset('template/logo/logo-honda.png')}}" rel="icon">
@@ -30,6 +33,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('template/public/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
 </head>
 
 <body>
@@ -46,7 +50,6 @@
     <!-- Navbar Start -->
     @include('public.components.navbar')
     <!-- Navbar End -->
-
 
     <!-- Carousel Start -->
     <div class="container-fluid p-0 mb-5">
@@ -101,9 +104,11 @@
     </div>
     <!-- Carousel End -->
 
+    @yield('content')
+
 
     <!-- Service Start -->
-    <div class="container-xxl py-5">
+    {{-- <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -138,12 +143,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Service End -->
 
 
     <!-- About Start -->
-    <div class="container-xxl py-5">
+    {{-- <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-6 pt-4" style="min-height: 400px;">
@@ -198,12 +203,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- About End -->
 
 
     <!-- Fact Start -->
-    <div class="container-fluid fact bg-dark my-5 py-5">
+    {{-- <div class="container-fluid fact bg-dark my-5 py-5">
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
@@ -228,12 +233,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Fact End -->
 
 
     <!-- Service Start -->
-    <div class="container-xxl service py-5">
+    {{-- <div class="container-xxl service py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class="text-primary text-uppercase">// Our Services //</h6>
@@ -338,12 +343,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Service End -->
 
 
     <!-- Booking Start -->
-    <div class="container-fluid bg-secondary booking my-5 wow fadeInUp" data-wow-delay="0.1s">
+    {{-- <div class="container-fluid bg-secondary booking my-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row gx-5">
                 <div class="col-lg-6 py-5">
@@ -390,12 +395,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Booking End -->
 
 
     <!-- Team Start -->
-    <div class="container-xxl py-5">
+    {{-- <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class="text-primary text-uppercase">// Our Technicians //</h6>
@@ -468,12 +473,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Team End -->
 
 
     <!-- Testimonial Start -->
-    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    {{-- <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="text-center">
                 <h6 class="text-primary text-uppercase">// Testimonial //</h6>
@@ -514,7 +519,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Testimonial End -->
 
 
@@ -541,6 +546,7 @@
 
     <!-- Template Javascript -->
     <script src="{{asset('template/public/js/main.js')}}"></script>
+    @yield('script')
 </body>
 
 </html>

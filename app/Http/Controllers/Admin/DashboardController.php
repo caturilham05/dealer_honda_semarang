@@ -174,8 +174,8 @@ class DashboardController extends Controller
             'tags'            => $request->tags,
             'content'         => $request->content,
             'is_active'       => !empty($request->is_active) ? 1 : 0,
-            'image'           => !empty($files) ? $files[0]['images'] : null,
-            'images'          => $files ?? NULL,
+            'image'           => !empty($files) ? $files[0]['images'] : $content->image,
+            'images'          => $files ?? $content->images,
             // 'ordering'     => empty($content) ? 1 : Content::increment('ordering', 1)
         ];
 

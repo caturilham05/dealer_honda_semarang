@@ -71,7 +71,7 @@
               <select class="form-control @error('is_admin') is-invalid @enderror" name="par_id">
                 <option value="">Pilih Menu Utama</option>
                 @foreach ($menus as $menu)
-                  <option value="{{$menu->id}}">{{$menu->name}}</option>
+                  <option value="{{$menu->id}}">{{$menu->name}} || {{$menu->route}}</option>
                 @endforeach
               </select>
               @error('is_admin')
