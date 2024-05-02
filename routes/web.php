@@ -78,10 +78,25 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/credit', [CreditTermsController::class, 'index'])->name('admin.credit');
 
     Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user');
-    
+
+    /*images*/
     Route::get('/admin/images', [ImagesController::class, 'index'])->name('admin.images');
-    Route::get('/admin/images', [ImagesController::class, 'index'])->name('admin.images');
-    Route::get('/admin/images/imageslider', [ImagesController::class, 'imageslider'])->name('admin.imageslider');
+    Route::get('/admin/images/imageslider', [ImagesController::class, 'imageslider'])->name('admin.images.imageslider');
+    Route::get('/admin/images/imageslider/create', [ImagesController::class, 'imageslider_create'])->name('admin.images.imageslider_create');
+    Route::post('/admin/images/imageslider/create', [ImagesController::class, 'imageslider_store'])->name('admin.images.imageslider_store');
+    Route::get('/admin/images/imageslider/edit/{id}', [ImagesController::class, 'imageslider_edit'])->name('admin.images.imageslider_edit');
+    Route::put('/admin/images/imageslider/edit/{id}', [ImagesController::class, 'imageslider_update'])->name('admin.images.imageslider_update');
+    Route::put('/admin/images/imageslider/edit/{id}/set-active', [ImagesController::class, 'imageslider_update_active'])->name('admin.images.imageslider_update_active');
+    Route::delete('/admin/images/imageslider/{id}', [ImagesController::class, 'imageslider_destroy'])->name('admin.images.imageslider_destroy');
+
+    Route::get('/admin/images-category', [ImagesController::class, 'imageslider_category'])->name('admin.images.imageslider_category');
+    Route::get('/admin/images-category/create', [ImagesController::class, 'imageslider_category_create'])->name('admin.images.imageslider_category_create');
+    Route::post('/admin/images-category/create', [ImagesController::class, 'imageslider_category_store'])->name('admin.images.imageslider_category_store');
+    Route::get('/admin/images-category/edit/{id}', [ImagesController::class, 'imageslider_category_edit'])->name('admin.images.imageslider_category_edit');
+    Route::put('/admin/images-category/edit/{id}', [ImagesController::class, 'imageslider_category_update'])->name('admin.images.imageslider_category_update');
+    Route::put('/admin/images-category/edit/{id}/set-active', [ImagesController::class, 'imageslider_category_update_active'])->name('admin.images.imageslider_category_update_active');
+    Route::delete('/admin/images-category/{id}', [ImagesController::class, 'imageslider_category_destroy'])->name('admin.images.imageslider_category_delete');
+    /*images*/
 
     /*Kontak*/
     Route::get('/admin/contact', [ContactController::class, 'index'])->name('admin.contact');

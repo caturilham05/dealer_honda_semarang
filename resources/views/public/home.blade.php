@@ -1,6 +1,36 @@
 @extends('public.layout.public')
 
 @section('content')
+  <div class="container-fluid p-0 mb-5">
+      <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+      			@php
+      				$active = 1;
+      			@endphp
+          	@foreach ($imageslider as $images)
+          		@foreach ($images['images'] as $item)
+		            <div class="carousel-item {{($active == 1) ? 'active' : ''}}">
+		                <img class="w-100" src="{{asset('/storage/images/imageslider/'.$item['images'])}}" alt="Image">
+		            </div>
+		            @php
+		            	$active++;
+		            @endphp
+          		@endforeach
+          	@endforeach
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+          </button>
+      </div>
+  </div>
+
 	<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
 	    <div class="container">
 	        <div class="owl-carousel testimonial-carousel position-relative">
