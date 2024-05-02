@@ -40,7 +40,7 @@
             </div>
 
             <div class="form-group">
-              <label for="description">Alamat</label>
+              <label for="description">Deskripsi</label>
               <textarea class="form-control" rows="3" name="description" placeholder="Deskripsi"></textarea>
             </div>
 
