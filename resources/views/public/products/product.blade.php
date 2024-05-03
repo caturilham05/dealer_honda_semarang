@@ -5,11 +5,10 @@
       <div class="container">
           <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
               <h6 class="text-primary text-uppercase">Katalog</h6>
-              <h1 class="mb-5">Daftar Mobil</h1>
+              <h1 class="mb-5 text-uppercase">Daftar Mobil</h1>
           </div>
 				  @include('public.partials.product_filter')
-          <div class="row g-4" id="product_list">
-          </div>
+          <div class="row g-4" id="product_list"></div>
       </div>
   </div>
 @endsection

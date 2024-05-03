@@ -7,27 +7,32 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\ProductsType;
 use App\Models\Contacts;
+use App\Models\Promo;
 
 class ProductController extends Controller
 {
     protected $contacts;
     protected $products;
     protected $product_type;
+    protected $promo;
     protected $data_view;
 
     public function __construct(
         Contacts $contacts,
         Products $products,
-        ProductsType $productType
+        ProductsType $productType,
+        Promo $promo
     )
     {
         $this->contacts     = $contacts->get()->first()->toArray();
         $this->products     = $products->with(['product_type', 'promo'])->where('is_active', 1)->orderBy('id', 'desc')->get()->toArray();
         $this->product_type = $productType->where('is_active', 1)->orderBy('id', 'desc')->get()->toArray();
+        $this->promo        = $promo->where('is_active', 1)->orderBy('id', 'desc')->get()->toArray();
         $this->data_view    = [
             'contact'      => $this->contacts,
             'products'     => $this->products,
-            'product_type' => $this->product_type
+            'product_type' => $this->product_type,
+            'promos'       => $this->promo
         ];
 
     }
@@ -102,4 +107,16 @@ class ProductController extends Controller
         return view('public.products.product_detail', $this->data_view);
     }
 
+    public function promo()
+    {
+        $this->data_view['title'] = 'Promo';
+        return view('public.products.promo', $this->data_view);
+    }
+
+    public function promo_detail($id)
+    {
+        $this->data_view['promo_detail'] = Promo::where('id', $id)->first()->toArray();
+        // dd($this->data_view);
+        return view('public.products.promo_detail', $this->data_view);
+    }
 }

@@ -33,6 +33,17 @@
                   </div>
               @enderror
             </div>
+
+            <div class="form-group">
+              <label for="price">Harga Promo</label>
+              <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price" placeholder="Harga Promo">
+              @error('price')
+                  <div class="alert alert-danger mt-2">
+                      {{ $message }}
+                  </div>
+              @enderror
+            </div>
+
             <div class="form-group">
               <label for="description">Deskripsi Promo</label>
               <textarea class="form-control" rows="3" name="description" placeholder="Deskripsi Promo"></textarea>

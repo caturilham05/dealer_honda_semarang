@@ -127,6 +127,8 @@ Route::get('/product-list', [ProductController::class, 'product_list'])->name('p
 Route::get('/product-list/items/{id}', [ProductController::class, 'product_list_items'])->name('public.product_list_items');
 Route::get('/pricelist', [ProductController::class, 'price_list'])->name('public.product.pricelist');
 Route::get('/pricelist/items/{id}', [ProductController::class, 'price_list_items'])->name('public.price_list_items');
+Route::get('/promo', [ProductController::class, 'promo'])->name('public.promo');
+Route::get('/promo/detail/{id}', [ProductController::class, 'promo_detail'])->name('public.promo_detail');
 
 Route::get('/credit', [DashboardController::class, 'home'])->name('public.product');
 Route::get('/credit-terms', [DashboardController::class, 'home'])->name('public.credit_terms');

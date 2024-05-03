@@ -6,8 +6,10 @@
 	@endphp
 	@foreach ($products as $product)
 		@php
-      $description = substr_replace($product['description'], '...', 20);
-      $delay += $delay;
+      $description       = substr_replace($product['description'], '...', 20);
+      $delay            += $delay;
+      $price_promo       = !empty($product['promo']) ? $product['price'] - $product['promo']['price'] : 0;
+      $price_promo_style = 'text-decoration: line-through;';
 		@endphp
     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="{!!$delay!!}s">
         <div class="team-item">
@@ -20,7 +22,10 @@
           <div class="bg-light text-center p-4">
             <a href="{{route('public.product_detail', $product['id'])}}"><h5 class="fw-bold mb-0">{{$product['name']}}</h5></a>
             <p class="mb-2">{{$product['product_type']['name']}}</p>
-            <small>Rp.{{Helper::helper_number_format($product['price'])}}</small>
+            <small style="{{!empty($product['promo']) ? $price_promo_style : ''}}">Rp.{{Helper::helper_number_format($product['price'])}}</small>
+            @if (!empty($product['promo']))
+              <b><h6>Rp.{{Helper::helper_number_format($price_promo)}}</h6></b>
+            @endif
           </div>
         </div>
     </div>

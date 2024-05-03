@@ -11,6 +11,7 @@ class Promo extends Model
     protected $table = 'promo';
     protected $fillable = [
         'name',
+        'price',
         'description',
         'image',
         'images',

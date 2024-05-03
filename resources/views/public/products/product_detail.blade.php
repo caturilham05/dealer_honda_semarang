@@ -2,15 +2,20 @@
 
 @section('content')
 		@php
-		$img_not_found = 'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg';
+		$img_not_found     = 'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg';
+    $price_promo       = !empty($product_detail['promo']) ? $product_detail['price'] - $product_detail['promo']['price'] : 0;
+    $price_promo_style = 'text-decoration: line-through;';
 		@endphp
     <!-- Page Header Start -->
     <div class="container-fluid page-header mb-5 p-0" style="background-image: url({{asset('/storage/products/'.$product_detail['image'])}});">
         <div class="container-fluid page-header-inner py-5">
             <div class="container text-center">
-				        <h6 class="text-white text-uppercase animated slideInDown">Detail</h6>
+				        <h6 class="text-white text-uppercase animated slideInDown">Detail Produk</h6>
                 <h1 class="text-uppercase display-3 text-white mb-3 animated slideInDown">{{$product_detail['name']}}</h1>
-                <h5 class="text-uppercase text-white mb-3 animated slideInDown">Rp.{{Helper::helper_number_format($product_detail['price'])}}</h5>
+                <h5 class="text-uppercase text-white mb-3 animated slideInDown" style="{{!empty($product_detail['promo']) ? $price_promo_style : ''}}">Rp.{{Helper::helper_number_format($product_detail['price'])}}</h5>
+                @if (!empty($product_detail['promo']))
+                  <h5 class="text-uppercase text-white mb-3 animated slideInDown">Rp.{{Helper::helper_number_format($price_promo)}}</h5>
+                @endif
             </div>
         </div>
     </div>
@@ -73,7 +78,7 @@
       </div>
       <div class="mt-5 mb-5">
       	<h1 class="text-uppercase">Mobil Terkait</h1>
-			  <div class="row g-4" id="product_list" data-car_cat="{{$product_detail['product_type_id']}}">
+			  <div class="row g-4" id="product_car_cat" data-car_cat="{{$product_detail['product_type_id']}}"></div>
       </div>
     </div>
   </div>
@@ -82,23 +87,23 @@
 @section('script')
 	<script type="text/javascript">
 	    $(document).ready(function(){
-	    	let car_cat = $('#product_list').data('car_cat');
+	    	let car_cat = $('#product_car_cat').data('car_cat');
 	    	car(car_cat)
 	      async function car(id)
 	      {
 		    	await $.ajax({
-		    		url: `/product-list/items/${car_cat}`,
+		    		url: `/product-list/items/${id}`,
 		    		type: 'GET',
 		    		dataType: 'json',
 		    		beforeSend:function(){
-		    			$('#product_list').html(`
+		    			$('#product_car_cat').html(`
 		    				<center>
 		    					<span>Loading...</span>
 		    				</center>
 		    			`);
 		    		},
 		    		success:function(res){
-		    			$('#product_list').html(res.html);
+		    			$('#product_car_cat').html(res.html);
 		    		}
 		    	})
 	      }

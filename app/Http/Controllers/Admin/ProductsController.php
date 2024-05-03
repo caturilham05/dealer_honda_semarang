@@ -172,7 +172,8 @@ class ProductsController extends Controller
     public function product_promo_store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name'  => 'required',
+            'price' => 'required'
         ]);
 
         if ($request->hasFile('images'))
@@ -189,8 +190,12 @@ class ProductsController extends Controller
             }
         }
 
+        $request->price = str_replace('.', '', $request->price);
+        $request->price = $request->price;
+
         $post = [
             'name'        => $request->name,
+            'price'       => $request->price,
             'description' => $request->description,
             'image'       => !empty($files) ? $files[0]['images'] : null,
             'images'      => $files ?? NULL,
