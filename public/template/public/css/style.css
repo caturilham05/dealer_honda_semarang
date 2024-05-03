@@ -262,6 +262,7 @@
 
 .team-item:hover .team-overlay {
     transform: scale(1);
+    opacity: 0.85;
 }
 
 .team-item .team-overlay .btn {

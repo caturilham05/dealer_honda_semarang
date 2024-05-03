@@ -35,21 +35,23 @@
 	    <div class="container">
 	        <div class="owl-carousel testimonial-carousel position-relative">
 	        		@if (!empty($products))
-	        			@foreach ($products as $product)      				
+	        			@foreach ($products as $product)
+	        				@php
+							      $description = substr_replace($product['description'], '...', 20);
+	        				@endphp
 			            <div class="testimonial-item text-center">
-									    {{-- <div class="card-img" style="background-image:url({{asset('/storage/products/'.$product['image'])}})"></div> --}}
 			                <img class="card-img bg-light p-2 mx-auto mb-3" src="{{asset('/storage/products/'.$product['image'])}}">
 	                    <h5 class="mb-0"><a href="">{{$product['name']}}</a></h5>
 	                    <p>Rp.{{Helper::helper_number_format($product['price'])}}</p>
 	                    <div class="testimonial-text bg-light text-center p-4">
-		                    <p class="mb-0">{{$product['description'] ?? '-'}}</p>
+		                    <p class="mb-0">{{$description ?? '-'}}</p>
 	                    </div>
 			            </div>
 	        			@endforeach
 	        		@endif
 	        </div>
       		<div class="text-center mt-5">
-		        <a href="" class="btn btn-primary py-3 px-5">Read More<i class="fa fa-arrow-right ms-3"></i></a>
+		        <a href="{{route('public.product_list')}}" class="btn btn-primary py-3 px-5">Lihat Semua Mobil<i class="fa fa-arrow-right ms-3"></i></a>
       		</div>
 	    </div>
 	</div>
@@ -57,7 +59,7 @@
   <div class="container-xxl service py-5">
       <div class="container">
       	@foreach ($datas as $item)
-      			@if ($item['content_type_id'] == 2)
+      			@if ($item['content_type_id'] == 1)
 		          <div class="text-center wow fadeInUp clearfix" data-wow-delay="0.1s" style="margin-top: 2.5rem;">
 		              <h6 class="text-primary text-uppercase">{!!$item['intro']!!}</h6>
 		              <h1 class="mb-3">{!!$item['title']!!}</h1>

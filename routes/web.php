@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Admin\ContentTypeController;
 
 use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,8 +118,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 
-
 Route::get('/', [HomeController::class, 'index'])->name('public.home');
 Route::get('/home', [HomeController::class, 'index'])->name('public.home');
+
 Route::get('/product', [DashboardController::class, 'home'])->name('public.product');
-Route::get('/product-list', [DashboardController::class, 'home'])->name('public.product-list');
+Route::get('/product-list', [ProductController::class, 'product_list'])->name('public.product_list');
+Route::get('/product-list/items/{id}', [ProductController::class, 'product_list_items'])->name('public.product_list_items');
+Route::get('/pricelist', [ProductController::class, 'price_list'])->name('public.product.pricelist');
+Route::get('/pricelist/items/{id}', [ProductController::class, 'price_list_items'])->name('public.price_list_items');
+
+Route::get('/credit', [DashboardController::class, 'home'])->name('public.product');
+Route::get('/credit-terms', [DashboardController::class, 'home'])->name('public.credit_terms');
+Route::get('/credit-simulation', [DashboardController::class, 'home'])->name('public.credit_simulation');
