@@ -79,17 +79,17 @@
 
             <div class="form-group">
               <label for="specification">Spesifikasi Mobil</label>
-              <textarea class="form-control" rows="3" name="specification" placeholder="Spesifikasi Mobil">{{old('specification', $product['specification'])}}</textarea>
+              <textarea id="summernote" name="specification">{{old('specification', $product['specification'])}}</textarea>
             </div>
 
             <div class="form-group">
               <label for="special_feature">Fitur Spesial</label>
-              <textarea class="form-control" rows="3" name="special_feature" placeholder="Fitur Spesial">{{old('special_feature', $product['special_feature'])}}</textarea>
+              <textarea id="summernote1" name="special_feature">{{old('special_feature', $product['special_feature'])}}</textarea>
             </div>
 
             <div class="form-group">
               <label for="description">Deskripsi Mobil</label>
-              <textarea class="form-control" rows="3" name="description" placeholder="Deskripsi Mobil">{{old('description', $product['description'])}}</textarea>
+              <textarea id="summernote2" name="description">{{old('description', $product['description'])}}</textarea>
             </div>
 
             <div class="form-group">
@@ -114,4 +114,32 @@
           </div>
         </form>
     </div>
+@endsection
+@section('script')
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('body').on('keyup', '#price', function(event) {
+        if(event.which >= 37 && event.which <= 40) return;
+        // format number
+        $(this).val(function(index, value) {
+          return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        });
+      });
+
+      $('#summernote').summernote({
+        height: 300,
+        focus: false
+      })
+
+      $('#summernote1').summernote({
+        height: 300,
+        focus: false
+      })
+
+      $('#summernote2').summernote({
+        height: 300,
+        focus: false
+      })
+    })
+  </script>
 @endsection

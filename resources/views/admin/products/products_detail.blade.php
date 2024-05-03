@@ -78,15 +78,15 @@
     			<div class="row">
     				<div class="col-md-4">
     					<h4>SPESIFIKASI</h4>
-			    		<span>{!! Helper::helper_nl2br($item->specification) ?? '-' !!}</span>
+			    		<span>{!! $item->specification ?? '-' !!}</span>
     				</div>
     				<div class="col-md-4">
     					<h4>FITUR SPESIAL</h4>
-			    		<span>{!! Helper::helper_nl2br($item->special_feature) ?? '-' !!}</span>
+			    		<span>{!! $item->special_feature ?? '-' !!}</span>
     				</div>
     				<div class="col-md-4">
     					<h4>DESKRIPSI</h4>
-			    		<span>{!! Helper::helper_nl2br($item->description) ?? '-' !!}</span>
+			    		<span>{!! $item->description ?? '-' !!}</span>
     				</div>
     			</div>
     		</div>

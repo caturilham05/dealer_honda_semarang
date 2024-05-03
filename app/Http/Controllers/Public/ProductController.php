@@ -96,4 +96,10 @@ class ProductController extends Controller
         }
     }
 
+    public function detail($id)
+    {
+        $this->data_view['product_detail'] = Products::with(['product_type', 'promo'])->where('id', $id)->first()->toArray();
+        return view('public.products.product_detail', $this->data_view);
+    }
+
 }

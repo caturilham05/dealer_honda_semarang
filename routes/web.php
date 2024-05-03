@@ -122,6 +122,7 @@ Route::get('/', [HomeController::class, 'index'])->name('public.home');
 Route::get('/home', [HomeController::class, 'index'])->name('public.home');
 
 Route::get('/product', [DashboardController::class, 'home'])->name('public.product');
+Route::get('/product/detail/{id}', [ProductController::class, 'detail'])->name('public.product_detail');
 Route::get('/product-list', [ProductController::class, 'product_list'])->name('public.product_list');
 Route::get('/product-list/items/{id}', [ProductController::class, 'product_list_items'])->name('public.product_list_items');
 Route::get('/pricelist', [ProductController::class, 'price_list'])->name('public.product.pricelist');
