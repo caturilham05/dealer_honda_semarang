@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Credit extends Model
 {
     use HasFactory;
+
+    protected $table    = 'credit_terms';
+    protected $fillable = [
+        'description',
+        'image',
+        'images',
+        'is_active'
+    ];
+
+    protected $casts = [
+        'images' => 'array'
+    ];
 }

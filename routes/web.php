@@ -76,7 +76,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/admin/products/promo/{id}', [ProductsController::class, 'destroy_promo'])->name('admin.products.promo_destroy');
     /*PRODUCTS*/
 
+    /*Credit*/
     Route::get('/admin/credit', [CreditTermsController::class, 'index'])->name('admin.credit');
+    Route::get('/admin/credit/credit-terms', [CreditTermsController::class, 'index'])->name('admin.credit_terms');
+    Route::get('/admin/credit/credit-terms/create', [CreditTermsController::class, 'credit_terms_create'])->name('admin.credit_terms_create');
+    Route::get('/admin/credit/credit-terms/edit/{id}', [CreditTermsController::class, 'credit_terms_edit'])->name('admin.credit_terms_edit');
+    Route::put('/admin/credit/credit-terms/edit/{id}', [CreditTermsController::class, 'credit_terms_update'])->name('admin.credit_terms_update');
+    Route::put('/admin/credit/credit-terms/edit/{id}/set-active', [CreditTermsController::class, 'credit_terms_update_active'])->name('admin.credit_terms_update_active');
+    Route::post('/admin/credit/credit-terms/create', [CreditTermsController::class, 'credit_terms_store'])->name('admin.credit_terms_store');
+    Route::delete('/admin/credit/credit-terms/{id}', [CreditTermsController::class, 'credit_terms_destroy'])->name('admin.credit_terms_destroy');
+
+    /*Credit*/
 
     Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user');
 
