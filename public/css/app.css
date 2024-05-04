@@ -6,10 +6,6 @@
    margin: 1rem;
 }
 
-.card-img-slider {
-   background-size: cover;
-   background-repeat: no-repeat;
-   background-position: center center;
-   /*height: 350px;*/
-   /*margin: 1rem;*/
+.wa:hover{
+   color: #D81324 !important;
 }

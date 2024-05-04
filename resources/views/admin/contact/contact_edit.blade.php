@@ -42,6 +42,14 @@
               <label for="description">Deskripsi</label>
               <textarea class="form-control" rows="3" name="description" placeholder="Alamat Lengkap">{{old('description', $item['description'])}}</textarea>
             </div>
+            <div class="form-group">
+              <label for="url_google_maps">URL Google Maps</label>
+              <textarea class="form-control" rows="3" name="url_google_maps" placeholder="Alamat Lengkap">{{old('url_google_maps', $item['url_google_maps'])}}</textarea>
+            </div>
+            <div class="form-group">
+              <label for="text_message">Isi Pesan</label>
+              <textarea class="form-control" rows="3" name="text_message" placeholder="Isi Pesan">{{old('text_message', $item['text_message'])}}</textarea>
+            </div>
             <div class="form-check">
               <input type="checkbox" name="is_active" class="form-check-input" id="is_active" {{!empty($item['is_active']) ? 'checked' : ''}}>
               <label class="form-check-label" for="is_active">Aktif / Tidak Aktif</label>

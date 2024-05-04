@@ -51,6 +51,8 @@
                       <th>Nomor HP (Whatsapp)</th>
                       <th>Alamat Lengkap</th>
                       <th>Deskripsi</th>
+                      <th>Isi Pesan</th>
+                      <th>Google Maps</th>
                       <th>Aktif / Tidak Aktif</th>
                       <th>Aksi</th>
                     </tr>
@@ -61,6 +63,8 @@
                             <td width="10%">{{$item->whatsapp_number}}</td>
                             <td width="10%">{{$item->address}}</td>
                             <td width="10%">{{$item->description}}</td>
+                            <td width="10%">{{$item->text_message}}</td>
+                            <td width="30%">{!!$item->url_google_maps!!}</td>
                             <td width="10%">
                                 <input type="checkbox" name="is_active" value="{{$item->is_active}}" data-id="{{$item->id}}" class="checkbox" {{$item->is_active == 1 ? 'checked' : ''}}>
                                 <label class="form-check-label" for="is_active">{{!empty($item->is_active) ? 'Aktif' : 'Tidak Aktif'}}</label>

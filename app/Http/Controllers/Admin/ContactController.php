@@ -34,10 +34,17 @@ class ContactController extends Controller
             'whatsapp_number.required' => 'Nomor HP tidak boleh kosong'
         ]);
 
+        if (preg_match('~^0~is', $request->whatsapp_number))
+        {
+            $request->whatsapp_number = preg_replace('~^0~is', '62', $request->whatsapp_number);
+        }
+
         $post = [
             'whatsapp_number' => $request->whatsapp_number,
             'address'         => $request->address,
             'description'     => $request->description,
+            'text_message'    => $request->text_message,
+            'url_google_maps' => $request->url_google_maps,
             'is_active'       => !empty($request->is_active) ? 1 : 0
         ];
 
@@ -61,11 +68,19 @@ class ContactController extends Controller
         ],[
             'whatsapp_number.required' => 'Nomor HP tidak boleh kosong'
         ]);
+
+        if (preg_match('~^0~is', $request->whatsapp_number))
+        {
+            $request->whatsapp_number = preg_replace('~^0~is', '62', $request->whatsapp_number);
+        }
+
         $contact = Contacts::findOrFail($id);
         $post = [
             'whatsapp_number' => $request->whatsapp_number,
             'address'         => $request->address,
             'description'     => $request->description,
+            'text_message'    => $request->text_message,
+            'url_google_maps' => $request->url_google_maps,
             'is_active'       => !empty($request->is_active) ? 1 : 0
         ];
 

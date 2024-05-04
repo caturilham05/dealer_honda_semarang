@@ -81,18 +81,20 @@
                   <div class="py-5">
                       <h1 class="text-white mb-4">Hubungi Kami</h1>
                       <div style="display: flex; align-items: center; margin-bottom: 1rem; letter-spacing: 2px;">
-												<img style="width: 7%; margin-right: 0.5rem; " src="{{asset('template/logo/wa.png')}}" alt="wa">
-	                      <h4 class="text-white mb-0">{{$contact['whatsapp_number']}}</h4>
+												<img style="width: 7%; margin-right: 0.5rem; " src="{{asset('template/logo/wa.png')}}" alt="wa">	                      
+	                      <a href="https://wa.me/+{{$contact['whatsapp_number']}}?text={{$contact['text_message']}}" target="_blank"><h4 class="text-white mb-0 wa">{{$contact['whatsapp_number']}}</h4></a>
                       </div>
                       <h5 class="text-white mb-2">{!!$contact['address']!!}</h5>
                       <p class="text-white mb-0">{!!$contact['description']!!}</p>
                   </div>
               </div>
-              <div class="col-lg-6">
-                  <div class="bg-primary h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
-										<iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d16548.431254934538!2d110.84071544267435!3d-6.80539907023976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sid!2sid!4v1714585406703!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                  </div>
-              </div>
+              @if (!empty($contact['url_google_maps']))
+	              <div class="col-lg-6">
+	                  <div class="bg-primary h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
+	                  	{!! $contact['url_google_maps'] !!}
+	                  </div>
+	              </div>
+              @endif
           </div>
       </div>
   </div>

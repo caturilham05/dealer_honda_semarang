@@ -15,6 +15,8 @@ class Contacts extends Model
         'address',
         'social_media',
         'description',
+        'url_google_maps',
+        'text_message',
         'is_active',
     ];
 }

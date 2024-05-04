@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ContentTypeController;
 
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductController;
+use App\Http\Controllers\Public\CreditController;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,7 +128,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     /*Settings*/
 });
 
-
 Route::get('/', [HomeController::class, 'index'])->name('public.home');
 Route::get('/home', [HomeController::class, 'index'])->name('public.home');
 
@@ -141,5 +141,5 @@ Route::get('/promo', [ProductController::class, 'promo'])->name('public.promo');
 Route::get('/promo/detail/{id}', [ProductController::class, 'promo_detail'])->name('public.promo_detail');
 
 Route::get('/credit', [DashboardController::class, 'home'])->name('public.product');
-Route::get('/credit-terms', [DashboardController::class, 'home'])->name('public.credit_terms');
-Route::get('/credit-simulation', [DashboardController::class, 'home'])->name('public.credit_simulation');
+Route::get('/credit-terms', [CreditController::class, 'credit_terms'])->name('public.credits.credit_terms');
+Route::get('/credit-simulation', [CreditController::class, 'credit_simulation'])->name('public.credits.credit_simulation');

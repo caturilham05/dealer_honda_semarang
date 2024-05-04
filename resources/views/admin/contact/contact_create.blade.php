@@ -44,6 +44,16 @@
               <textarea class="form-control" rows="3" name="description" placeholder="Deskripsi"></textarea>
             </div>
 
+            <div class="form-group">
+              <label for="url_google_maps">URL Google Maps</label>
+              <textarea class="form-control" rows="3" name="url_google_maps" placeholder="Deskripsi"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="text_message">URL Google Maps</label>
+              <textarea class="form-control" rows="3" name="text_message" placeholder="Isi Pesan"></textarea>
+            </div>
+
 						<div class="form-check">
 							<input type="checkbox" name="is_active" class="form-check-input" id="is_active">
 							<label class="form-check-label" for="is_active">Aktif / Tidak Aktif</label>
