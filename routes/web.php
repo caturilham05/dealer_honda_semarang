@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Admin\ContentTypeController;
+use App\Http\Controllers\Admin\TestimonialController;
 
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductController;
@@ -119,6 +120,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/admin/contact/edit/{id}/set-active', [ContactController::class, 'update_active'])->name('admin.contact.update_active');
     Route::delete('/admin/contact/{id}', [ContactController::class, 'destroy'])->name('admin.contact.destroy');
     /*Kontak*/
+
+    /*testimonial*/
+    Route::get('/admin/testimonial', [TestimonialController::class, 'index'])->name('admin.testimonial');
+    Route::get('/admin/testimonial/create', [TestimonialController::class, 'create'])->name('admin.testimonial_create');
+    Route::get('/admin/testimonial/edit/{id}', [TestimonialController::class, 'edit'])->name('admin.testimonial_edit');
+    Route::post('/admin/testimonial/create', [TestimonialController::class, 'store'])->name('admin.testimonial_store');
+    Route::put('/admin/testimonial/edit/{id}', [TestimonialController::class, 'update'])->name('admin.testimonial_update');
+    Route::delete('/admin/testimonial/{id}', [TestimonialController::class, 'destroy'])->name('admin.testimonial_destroy');
+    /*testimonial*/
+
+    /*tenor*/
+    /*tenor*/
 
     /*Settings*/
     Route::get('/admin/navbars', [SettingsController::class, 'index'])->name('admin.navbars');
