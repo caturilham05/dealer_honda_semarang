@@ -2,7 +2,7 @@
     <div class="container py-5">
         <div class="row g-5">
             <div class="col-lg-4 col-md-6">
-                <h4 class="text-light mb-4">Address</h4>
+                <h4 class="text-light mb-4">Alamat Lengkap</h4>
                 <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>{!!$contact['address']!!}</p>
                 <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>{!!$contact['whatsapp_number']!!}</p>
             </div>
@@ -27,18 +27,7 @@
         <div class="copyright">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
-
-                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                    Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <div class="footer-menu">
-                        <a href="">Home</a>
-                        <a href="">Cookies</a>
-                        <a href="">Help</a>
-                        <a href="">FQAs</a>
-                    </div>
+                    &copy; <a class="border-bottom" href="#">{{url('/')}}</a>, All Right Reserved.
                 </div>
             </div>
         </div>
