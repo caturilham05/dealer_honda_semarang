@@ -7,6 +7,7 @@ use App\Models\Products;
 use App\Models\Products_installments;
 use App\Models\ProductsType;
 use App\Models\Promo;
+use App\Models\Tenor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\Helper;
@@ -19,7 +20,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $query = Products::with(['product_type', 'promo', 'products_installments']);
+        $query = Products::with(['product_type', 'promo', 'products_installments.tenor']);
         if (!empty(request()->input('id'))) {
             $query->where('id', request()->input('id'));
         }
@@ -29,10 +30,9 @@ class ProductsController extends Controller
         }
 
         $product = $query->orderBy('id', 'desc')->paginate(10);
-        // dd($product);
         $data    = [
             'title'    => 'Mobil',
-            'products' => $product
+            'products' => $product,
         ];
 
         return view('admin.products.products', $data);
@@ -70,7 +70,8 @@ class ProductsController extends Controller
         $data         = [
             'title'         => 'Tambah Mobil Baru',
             'product_types' => $product_type,
-            'promos'        => $promo
+            'promos'        => $promo,
+            'tenors'        => Tenor::get()
         ];
         return view('admin.products.products_create', $data);
     }
@@ -112,9 +113,6 @@ class ProductsController extends Controller
         $request->price = str_replace('.', '', $request->price);
         $request->price = $request->price;
 
-        $request->tdp = str_replace('.', '', $request->tdp);
-        $request->tdp = $request->tdp;
-
         try {
 
             DB::beginTransaction();
@@ -137,7 +135,7 @@ class ProductsController extends Controller
                 'promo_id'        => $request->promo_id,
                 'name'            => $request->name,
                 'price'           => $request->price,
-                'tdp'             => $request->tdp,
+                // 'tdp'          => $request->tdp,
                 'specification'   => $request->specification,
                 'special_feature' => $request->special_feature,
                 'description'     => $request->description,
@@ -149,12 +147,14 @@ class ProductsController extends Controller
             $last_id = Products::create($post);
 
             if (!empty($request->price_installment)) {
-                foreach ($request->price_installment as $val_price) {
+                foreach ($request->price_installment as $key => $val_price) {
                     if (!empty($val_price)) {
                         $val_price          = str_replace('.', '', $val_price);
                         $post_installment[] = [
                             'product_id'        => $last_id->id,
-                            'price_installment' => $val_price
+                            'price_installment' => $val_price,
+                            'tenor_id'          => $request->tenor[$key],
+                            'tdp'               => $request->tdp[$key],
                         ];
                     }
                 }
@@ -260,7 +260,8 @@ class ProductsController extends Controller
             'title'         => 'Edit '.$product->name,
             'product'       => $product,
             'product_types' => $product_type,
-            'promos'        => $promo
+            'promos'        => $promo,
+            'tenors'        => Tenor::get()
         ];
 
         return view('admin.products.products_edit', $data);
@@ -306,33 +307,32 @@ class ProductsController extends Controller
 
         $request->price = str_replace('.', '', $request->price);
         $request->price = $request->price;
-        $request->tdp   = str_replace('.', '', $request->tdp);
-        $request->tdp   = $request->tdp;
 
         try {
             $product             = Products::findOrFail($id);
             $product_installment = Products_installments::where('product_id', $id)->get();
-            if ($product_installment->isEmpty()) {
-                if (!empty($request->price_installment)) {
-                    foreach ($request->price_installment as $val_price) {
-                        $val_price = str_replace('.', '', $val_price);
-                        if (!empty($val_price)) {
-                            $post_installment[] = [
-                                'product_id'        => $id,
-                                'price_installment' => $val_price
-                            ];
-                        }
+
+            if (!empty($request->price_installment)) {
+                foreach ($request->price_installment as $key => $val_price) {
+                    if (!empty($val_price)) {
+                        $val_price          = str_replace('.', '', $val_price);
+                        $post_installment[] = [
+                            'product_id'        => $id,
+                            'price_installment' => $val_price,
+                            'tenor_id'          => $request->tenor[$key],
+                            'tdp'               => $request->tdp[$key],
+                        ];
                     }
                 }
-                Products_installments::insert($post_installment);
+            }
+
+            if (!$product_installment->isEmpty()) {
+                $deleted = Products_installments::where('product_id', $id)->delete();
+                if ($deleted) {
+                    Products_installments::insert($post_installment);
+                }
             } else {
-                if (!empty($request->price_installment)) {
-                    foreach ($request->price_installment as $key => $val_price) {
-                        $val_price = str_replace('.', '', $val_price);
-                        Products_installments::where('id', $request->id_installment[$key])
-                        ->update(['price_installment' => $val_price]);
-                    }
-                }   
+                Products_installments::insert($post_installment);
             }
 
             if ($request->hasFile('images'))
@@ -361,7 +361,6 @@ class ProductsController extends Controller
                 'promo_id'        => $request->promo_id,
                 'name'            => $request->name,
                 'price'           => $request->price,
-                'tdp'             => $request->tdp,
                 'specification'   => $request->specification,
                 'special_feature' => $request->special_feature,
                 'description'     => $request->description,
@@ -532,5 +531,19 @@ class ProductsController extends Controller
 
         $promo->delete();
         return redirect()->route('admin.products.promo')->with(['success' => sprintf('%s Berhasil Dihapus.', $promo->name)]);
+    }
+
+    public function product_installment_view()
+    {
+        if (request()->ajax()) {
+            $data = [
+                'tenors' => Tenor::get()
+            ];
+            $html = view('admin.products.products_create_installment', $data)->render();
+            return response()->json([
+                'html'   => $html,
+                'tenors' => $data['tenors']
+            ]);
+        }
     }
 }

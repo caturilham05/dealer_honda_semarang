@@ -9,9 +9,16 @@ class Products_installments extends Model
 {
     use HasFactory;
 
-    protected $table = 'products_installments';
+    protected $table    = 'products_installments';
     protected $fillable = [
         'product_id',
-        'price_installment'
+        'tenor_id',
+        'price_installment',
+        'tdp'
     ];
+
+    public function tenor()
+    {
+        return $this->hasOne(Tenor::class, 'id', 'tenor_id');
+    }
 }

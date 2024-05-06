@@ -19,6 +19,9 @@
 
 @section('content')
     <div class="card">
+      {{-- @php
+      dd($product);
+      @endphp --}}
         <!-- /.card-header -->
         <!-- form start -->
         <form action="{{route('admin.products.update_product', $product['id'])}}" method="POST" enctype="multipart/form-data">
@@ -87,7 +90,11 @@
               @enderror
             </div>
 
-            <div class="form-group">
+            <label>Angsuran</label>
+            @include('admin.products.products_create_installment', ['tenors' => $tenors])
+
+
+            {{-- <div class="form-group">
               <label for="tdp">Total Down Payment</label>
               <input type="text" class="form-control" id="tdp" name="tdp" value="{{old('name', $product['tdp'])}}" placeholder="TDP">
             </div>
@@ -118,7 +125,7 @@
                   <input type="text" class="form-control" id="price_installment_{{$key}}" name="price_installment[]" placeholder="Angsuran {{$key}}" value="{{$item['price_installment']}}">
                 </div>
               @endforeach
-            @endif
+            @endif --}}
 
 
             <div class="form-group">
@@ -182,6 +189,22 @@
         height: 300,
         focus: false
       })
+
+      $('#btn-multiform').on('click', function(){
+        console.log('object')
+        tenor()
+      });
+
+      function tenor(){
+        $.ajax({
+          url: '/admin/products/products-list/installment',
+          type: 'get',
+          dataType: 'json',
+          success:function(res){
+            $('#multiform').append(res.html);
+          }
+        })
+      }
 
       function number_custom(index) {
         $('body').on('keyup', index, function(event) {

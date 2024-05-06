@@ -18,14 +18,12 @@
 	        <thead>
 	          <tr>
 	            <th>Tipe Mobil</th>
-	            {{-- <th>Harga Mobil</th> --}}
 	            <th>Tahun</th>
 	          </tr>
 	        </thead>
 	        <tbody>
 	        	<tr>
 	        		<td>{{$item->product_type->name}}</td>
-	        		{{-- <td>Rp.{{Helper::helper_number_format($item->product_type->price)}}</td> --}}
 	        		<td>{{$item->product_type->years}}</td>
 	        	</tr>
 	        </tbody>
@@ -75,6 +73,32 @@
 		    	</div>
     		@endif
     		<div class="container mt-4">
+    			@if (!$item->products_installments->isEmpty())
+	    			<div class="table mt-4 mb-4">
+	    				<table class="table table-bordered table-hover ">
+	    					<thead>
+	    						<tr>
+	    							<th>Tenor</th>
+	    							<th>Angsuran</th>
+	    							<th>TDP</th>
+	    						</tr>
+	    					</thead>
+	    					<tbody>
+	    						@foreach ($item->products_installments as $pi)
+	    							<tr>
+	    								<td width="30%">{{$pi->tenor->tenor.' '.$pi->tenor->unit}}</td>
+	    								<td width="30%">{{Helper::helper_number_format($pi->price_installment)}}</td>
+	    								<td width="30%">{{Helper::helper_number_format($pi->tdp)}}</td>
+	    							</tr>
+	    						@endforeach
+	    					</tbody>
+	    				</table>
+	    			</div>
+	    		@else
+	    			<div class="mt-4 mb-4">
+			    		<center><span>Mobil ini tidak memiliki Angsuran</span></center>
+	    			</div>
+    			@endif
     			<div class="row">
     				<div class="col-md-4">
     					<h4>SPESIFIKASI</h4>

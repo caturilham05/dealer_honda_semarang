@@ -60,6 +60,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/admin/products/products-list/edit/{id}', [ProductsController::class, 'update_product'])->name('admin.products.update_product');
     Route::put('/admin/products/products-list/edit/{id}/set-active', [ProductsController::class, 'update_product_active'])->name('admin.products.update_product_active');
     Route::delete('/admin/products/products-list/{id}', [ProductsController::class, 'destroy_product'])->name('admin.products.product_destroy');
+    Route::get('/admin/products/products-list/installment', [ProductsController::class, 'product_installment_view'])->name('admin.product_installment_view');
 
     Route::get('/admin/products/products-type', [ProductsController::class, 'product_type'])->name('admin.products_type');
     Route::get('/admin/products/products-type/create', [ProductsController::class, 'product_type_create'])->name('admin.products.product_type_create');

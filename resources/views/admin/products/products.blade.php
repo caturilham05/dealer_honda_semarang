@@ -53,8 +53,6 @@
                       <th>Harga Mobil</th>
                       <th>Promo</th>
                       <th>Spesifikasi</th>
-                      {{-- <th>Fitur Spesial</th> --}}
-                      {{-- <th>Deskripsi</th> --}}
                       <th>Foto Mobil</th>
                       <th>Aktif / Tidak Aktif</th>
                       <th>Aksi</th>
@@ -71,14 +69,11 @@
                             <td>
                                 <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg_{{$item->id}}">{!! $item->name !!}</a>
                                 @include('admin.products.products_detail', ['item' => $item])
-                                {{-- <a href="{{ route('admin.products.products_detail', $item->id) }}" data-bs-toggle="modal" data-bs-target="#modal-xl">{{$item->name}}</a> --}}
                             </td>
                             <td>{{$item->product_type->name}}</td>
                             <td>Rp.{{Helper::helper_number_format($item->price)}}</td>
                             <td>{{$item->promo->name ?? '-'}}</td>
                             <td>{!! Helper::helper_nl2br($specification) ?? '-' !!}</td>
-                            {{-- <td>{!! nl2br(e($special_feature)) ?? '-' !!}</td> --}}
-                            {{-- <td>{!! nl2br(e($description)) ?? '-' !!}</td> --}}
                             <td>
                                 @if (!empty($item->image))
                                   <img src="{{ asset('/storage/products/'.$item->image) }}" style="width: 150px">

@@ -85,25 +85,8 @@
               @enderror
             </div>
 
-            <div class="form-group">
-              <label for="tdp">Total Down Payment (TDP)</label>
-              <input type="text" class="form-control" id="tdp" name="tdp" placeholder="Harga Mobil">
-            </div>
-
-            <div class="form-group">
-              <label for="price_installment">Angsuran 1</label>
-              <input type="text" class="form-control" id="price_installment_1" name="price_installment[]" placeholder="Angsuran 1">
-            </div>
-
-            <div class="form-group">
-              <label for="price_installment">Angsuran 2</label>
-              <input type="text" class="form-control" id="price_installment_2" name="price_installment[]" placeholder="Angsuran 2">
-            </div>
-
-            <div class="form-group">
-              <label for="price_installment">Angsuran 3</label>
-              <input type="text" class="form-control" id="price_installment_3" name="price_installment[]" placeholder="Angsuran 3">
-            </div>
+            <label>Angsuran</label>
+            @include('admin.products.products_create_installment', ['tenors' => $tenors])
 
             <div class="form-group">
               <label for="specification">Spesifikasi Mobil</label>
@@ -153,16 +136,6 @@
       number_custom('#price_installment_2');
       number_custom('#price_installment_3');
 
-      function number_custom(index) {
-        $('body').on('keyup', index, function(event) {
-          if(event.which >= 37 && event.which <= 40) return;
-          // format number
-          $(this).val(function(index, value) {
-            return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-          });
-        });
-      }
-
       $('#summernote').summernote({
         height: 300,
         focus: false
@@ -177,6 +150,32 @@
         height: 300,
         focus: false
       })
+
+      $('#btn-multiform').on('click', function(){
+        console.log('object')
+        tenor()
+      });
+
+      function number_custom(index) {
+        $('body').on('keyup', index, function(event) {
+          if(event.which >= 37 && event.which <= 40) return;
+          // format number
+          $(this).val(function(index, value) {
+            return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+          });
+        });
+      }
+
+      function tenor(){
+        $.ajax({
+          url: '/admin/products/products-list/installment',
+          type: 'get',
+          dataType: 'json',
+          success:function(res){
+            $('#multiform').append(res.html);
+          }
+        })
+      }
     })
   </script>
 @endsection

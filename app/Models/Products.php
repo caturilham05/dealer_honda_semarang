@@ -15,7 +15,7 @@ class Products extends Model
         'promo_id',
         'name',
         'price',
-        'tdp',
+        // 'tdp',
         'specification',
         'special_feature',
         'description',
