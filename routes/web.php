@@ -161,3 +161,5 @@ Route::get('/promo/detail/{id}', [ProductController::class, 'promo_detail'])->na
 Route::get('/credit', [DashboardController::class, 'home'])->name('public.product');
 Route::get('/credit-terms', [CreditController::class, 'credit_terms'])->name('public.credits.credit_terms');
 Route::get('/credit-simulation', [CreditController::class, 'credit_simulation'])->name('public.credits.credit_simulation');
+Route::get('/credit-simulation/product-types/{id}', [CreditController::class, 'product_types'])->name('public.credits.product_types');
+Route::get('/credit-simulation/car/{id}', [CreditController::class, 'car'])->name('public.credits.car');

@@ -1,7 +1,7 @@
 @extends('public.layout.public')
 
 @section('content')
-  <div class="container-fluid p-0 mb-5">
+  <div class="container-fluid p-0">
       <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
       			@php
@@ -41,7 +41,7 @@
 	        				@endphp
 			            <div class="testimonial-item text-center">
 			                <img class="card-img bg-light p-2 mx-auto mb-3" src="{{asset('/storage/products/'.$product['image'])}}">
-	                    <h5 class="mb-0"><a href="">{{$product['name']}}</a></h5>
+	                    <h5 class="mb-0"><a href="{{route('public.product_detail', $product['id'])}}">{{$product['name']}}</a></h5>
 	                    <p>Rp.{{Helper::helper_number_format($product['price'])}}</p>
 	                    <div class="testimonial-text bg-light text-center p-4">
 		                    <p class="mb-0">{!!$description ?? '-'!!}</p>
