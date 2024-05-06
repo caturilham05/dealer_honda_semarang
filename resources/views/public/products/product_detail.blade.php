@@ -22,6 +22,49 @@
     </div>
     <!-- Page Header End -->
 
+    <div class="container-xxl py-3">
+      {{-- <pre>
+        @php
+        dd($products);
+        @endphp
+      </pre> --}}
+      <div class="container">
+        <div class="table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Harga</th>
+                <th class="text-center">Chat</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($products as $item)
+                @if ($product_detail['product_type_id'] == $item['product_type_id'])
+                  <tr>
+                    {{-- <pre>
+                      @php
+                        print_r($item);
+                      @endphp
+                    </pre> --}}
+                    <td width="40%">{{$item['name']}}</td>
+                    <td>{{Helper::helper_number_format($item['price'])}}</td>
+                    <td>
+                      <center>
+                        <a href="https://wa.me/+{{$contact['whatsapp_number']}}?text={{$contact['text_message']}}" target="_blank">
+                          <img class="logo_wa_car_detail" src="{{asset('template/logo/wa.png')}}" alt="wa">
+                        </a>
+                      </center>
+                    </td>
+                  </tr>
+                @endif
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
 	<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container">
       <div class="owl-carousel testimonial-carousel position-relative">
@@ -34,8 +77,32 @@
     </div>
 	</div>
 
+  <div class="container-xxl service py-3">
+    <div class="container">
+      <div class="row g-4 wow fadeInUp" data-wow-delay="0.2s">
+        <h3>Spesifikasi:</h3>
+        <div class="col-lg-12">
+          {!!$product_detail['specification']!!}
+        </div>
+      </div>
+      <hr>
+      <div class="row g-4 wow fadeInUp" data-wow-delay="0.2s">
+        <h3>Fitur Spesial:</h3>
+        <div class="col-lg-12">
+          {!!$product_detail['special_feature']!!}
+        </div>
+      </div>
+      <hr>
+      <div class="row g-4 wow fadeInUp" data-wow-delay="0.2s">
+        <h3>Deskripsi:</h3>
+        <div class="col-lg-12">
+          {!!$product_detail['description']!!}
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <div class="container-xxl service py-5">
+{{--   <div class="container-xxl service py-5">
     <div class="container">
       <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s">
           <div class="col-lg-4">
@@ -116,7 +183,7 @@
 			  <div class="row g-4" id="product_car_cat" data-car_cat="{{$product_detail['product_type_id']}}"></div>
       </div>
     </div>
-  </div>
+  </div> --}}
 @endsection
 
 @section('script')

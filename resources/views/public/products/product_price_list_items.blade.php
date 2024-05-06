@@ -21,14 +21,6 @@
 			    		</table>
 			    	</div>
           </div>
-          {{-- <div class="col-lg-4">
-          	<h3>Daftar Mobil</h3>
-          	<div style="display: flex; flex-direction: column;">
-          		@foreach ($products as $car)
-          			<div>oke</div>
-          		@endforeach
-          	</div>
-          </div> --}}
       </div>
     </div>
 </div>

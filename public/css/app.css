@@ -9,3 +9,20 @@
 .wa:hover{
    color: #D81324 !important;
 }
+
+.logo_wa_car_detail{
+   width: 5%;
+}
+
+
+@media screen and (max-width: 480px){
+   .logo_wa_car_detail{
+      width: 10%;
+   }
+}
+
+@media screen and (max-width: 800px){
+   .logo_wa_car_detail{
+      width: 30%;
+   }
+}
