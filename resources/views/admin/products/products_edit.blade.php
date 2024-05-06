@@ -78,6 +78,50 @@
             </div>
 
             <div class="form-group">
+              <label for="price">Harga Mobil</label>
+              <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{old('name', $product['price'])}}" placeholder="Harga Mobil">
+              @error('price')
+                  <div class="alert alert-danger mt-2">
+                      {{ $message }}
+                  </div>
+              @enderror
+            </div>
+
+            <div class="form-group">
+              <label for="tdp">Total Down Payment</label>
+              <input type="text" class="form-control" id="tdp" name="tdp" value="{{old('name', $product['tdp'])}}" placeholder="TDP">
+            </div>
+
+            @if ($product->products_installments->isEmpty())
+              <div class="form-group">
+                <label for="price_installment">Angsuran 1</label>
+                <input type="text" class="form-control" id="price_installment_1" name="price_installment[]" placeholder="Angsuran 1">
+              </div>
+
+              <div class="form-group">
+                <label for="price_installment">Angsuran 2</label>
+                <input type="text" class="form-control" id="price_installment_2" name="price_installment[]" placeholder="Angsuran 2">
+              </div>
+
+              <div class="form-group">
+                <label for="price_installment">Angsuran 3</label>
+                <input type="text" class="form-control" id="price_installment_3" name="price_installment[]" placeholder="Angsuran 3">
+              </div>
+            @else
+              @php
+                $key = 1;
+              @endphp
+              @foreach ($product->products_installments as $item)
+                <div class="form-group">
+                  <label for="price_installment">Angsuran {{$key++}}</label>
+                  <input type="hidden" class="form-control" id="id_installment" name="id_installment[]" placeholder="Angsuran {{$key}}" value="{{$item['id']}}">
+                  <input type="text" class="form-control" id="price_installment_{{$key}}" name="price_installment[]" placeholder="Angsuran {{$key}}" value="{{$item['price_installment']}}">
+                </div>
+              @endforeach
+            @endif
+
+
+            <div class="form-group">
               <label for="specification">Spesifikasi Mobil</label>
               <textarea id="summernote" name="specification">{{old('specification', $product['specification'])}}</textarea>
             </div>
@@ -118,13 +162,11 @@
 @section('script')
   <script type="text/javascript">
     $(document).ready(function(){
-      $('body').on('keyup', '#price', function(event) {
-        if(event.which >= 37 && event.which <= 40) return;
-        // format number
-        $(this).val(function(index, value) {
-          return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        });
-      });
+      number_custom('#price');
+      number_custom('#tdp');
+      number_custom('#price_installment_1');
+      number_custom('#price_installment_2');
+      number_custom('#price_installment_3');
 
       $('#summernote').summernote({
         height: 300,
@@ -140,6 +182,16 @@
         height: 300,
         focus: false
       })
+
+      function number_custom(index) {
+        $('body').on('keyup', index, function(event) {
+          if(event.which >= 37 && event.which <= 40) return;
+          // format number
+          $(this).val(function(index, value) {
+            return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+          });
+        });
+      }
     })
   </script>
 @endsection

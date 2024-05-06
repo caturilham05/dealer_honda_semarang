@@ -15,6 +15,7 @@ class Products extends Model
         'promo_id',
         'name',
         'price',
+        'tdp',
         'specification',
         'special_feature',
         'description',
@@ -35,5 +36,10 @@ class Products extends Model
     public function promo()
     {
         return $this->hasOne(Promo::class, 'id', 'promo_id');
+    }
+
+    public function products_installments()
+    {
+        return $this->hasMany(Products_installments::class, 'product_id');
     }
 }

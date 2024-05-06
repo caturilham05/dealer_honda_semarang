@@ -87,7 +87,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/admin/credit/credit-terms/edit/{id}/set-active', [CreditTermsController::class, 'credit_terms_update_active'])->name('admin.credit_terms_update_active');
     Route::post('/admin/credit/credit-terms/create', [CreditTermsController::class, 'credit_terms_store'])->name('admin.credit_terms_store');
     Route::delete('/admin/credit/credit-terms/{id}', [CreditTermsController::class, 'credit_terms_destroy'])->name('admin.credit_terms_destroy');
-
+    
+    Route::get('/admin/credit/tenor', [CreditTermsController::class, 'tenor'])->name('admin.tenor');
     /*Credit*/
 
     Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user');
@@ -129,9 +130,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/admin/testimonial/edit/{id}', [TestimonialController::class, 'update'])->name('admin.testimonial_update');
     Route::delete('/admin/testimonial/{id}', [TestimonialController::class, 'destroy'])->name('admin.testimonial_destroy');
     /*testimonial*/
-
-    /*tenor*/
-    /*tenor*/
 
     /*Settings*/
     Route::get('/admin/navbars', [SettingsController::class, 'index'])->name('admin.navbars');

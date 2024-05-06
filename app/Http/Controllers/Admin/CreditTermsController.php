@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Credit;
+use App\Models\Tenor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,6 +27,12 @@ class CreditTermsController extends Controller
     {
         $this->data_view['title'] = 'Syarat Kredit';
         return view('admin.credits.credit_terms', $this->data_view);
+    }
+
+    public function tenor()
+    {
+        $this->data_view['title'] = 'Tenor';
+        return view('admin.credits.tenor', $this->data_view);
     }
 
     /**

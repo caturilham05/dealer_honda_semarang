@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Products;
+use App\Models\Products_installments;
 use App\Models\ProductsType;
 use App\Models\Promo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -17,7 +19,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $query = Products::with(['product_type', 'promo']);
+        $query = Products::with(['product_type', 'promo', 'products_installments']);
         if (!empty(request()->input('id'))) {
             $query->where('id', request()->input('id'));
         }
@@ -27,6 +29,7 @@ class ProductsController extends Controller
         }
 
         $product = $query->orderBy('id', 'desc')->paginate(10);
+        // dd($product);
         $data    = [
             'title'    => 'Mobil',
             'products' => $product
@@ -109,34 +112,59 @@ class ProductsController extends Controller
         $request->price = str_replace('.', '', $request->price);
         $request->price = $request->price;
 
-        if ($request->hasFile('images'))
-        {
-            $files = [];
-            foreach ($request->file('images') as $file) {
-                if ($file->isValid()) {
-                    $filename = round(microtime(true) * 1000).'-'.str_replace(' ','-',$file->getClientOriginalName());
-                    $file->storeAs('public/products', $filename);
-                    $files[] = [
-                        'images' => $filename,
-                    ];
+        $request->tdp = str_replace('.', '', $request->tdp);
+        $request->tdp = $request->tdp;
+
+        try {
+
+            DB::beginTransaction();
+            if ($request->hasFile('images'))
+            {
+                $files = [];
+                foreach ($request->file('images') as $file) {
+                    if ($file->isValid()) {
+                        $filename = round(microtime(true) * 1000).'-'.str_replace(' ','-',$file->getClientOriginalName());
+                        $file->storeAs('public/products', $filename);
+                        $files[] = [
+                            'images' => $filename,
+                        ];
+                    }
                 }
             }
+
+            $post = [
+                'product_type_id' => $request->product_type_id,
+                'promo_id'        => $request->promo_id,
+                'name'            => $request->name,
+                'price'           => $request->price,
+                'tdp'             => $request->tdp,
+                'specification'   => $request->specification,
+                'special_feature' => $request->special_feature,
+                'description'     => $request->description,
+                'is_active'       => !empty($request->is_active) ? 1 : 0,
+                'image'           => !empty($files) ? $files[0]['images'] : null,
+                'images'          => $files ?? NULL,
+            ];
+
+            $last_id = Products::create($post);
+
+            if (!empty($request->price_installment)) {
+                foreach ($request->price_installment as $val_price) {
+                    if (!empty($val_price)) {
+                        $val_price          = str_replace('.', '', $val_price);
+                        $post_installment[] = [
+                            'product_id'        => $last_id->id,
+                            'price_installment' => $val_price
+                        ];
+                    }
+                }
+            }
+            Products_installments::insert($post_installment);
+            DB::commit(); // <= Commit the changes
+        } catch (Exception $e) {
+            DB::rollBack(); // <= Rollback in case of an exception
+            dd($e);
         }
-
-        $post = [
-            'product_type_id' => $request->product_type_id,
-            'promo_id'        => $request->promo_id,
-            'name'            => $request->name,
-            'price'           => $request->price,
-            'specification'   => $request->specification,
-            'special_feature' => $request->special_feature,
-            'description'     => $request->description,
-            'is_active'       => !empty($request->is_active) ? 1 : 0,
-            'image'           => !empty($files) ? $files[0]['images'] : null,
-            'images'          => $files ?? NULL,
-        ];
-
-        Products::create($post);
         return redirect()->route('admin.products_list')->with(['success' => sprintf('%s Berhasil Disimpan.', $request->name)]);
     }
 
@@ -225,7 +253,7 @@ class ProductsController extends Controller
      */
     public function edit_product(Products $products, $id)
     {
-        $product      = $products->with('product_type', 'promo')->where('id', $id)->first();
+        $product      = $products->with('product_type', 'promo', 'products_installments')->where('id', $id)->first();
         $product_type = ProductsType::select('id', 'name')->where('is_active', 1)->orderBy('id', 'desc')->get();
         $promo        = Promo::select('id', 'name')->where('is_active', 1)->orderBy('id', 'desc')->get();
         $data         = [
@@ -276,41 +304,77 @@ class ProductsController extends Controller
             ]
         );
 
-        $product = Products::findOrFail($id);
-        if ($request->hasFile('images'))
-        {
-            $files = [];
-            foreach ($request->file('images') as $file) {
-                if ($file->isValid()) {
-                    $filename = round(microtime(true) * 1000).'-'.str_replace(' ','-',$file->getClientOriginalName());
-                    $file->storeAs('public/products', $filename);
-                    $files[] = [
-                        'images' => $filename,
-                    ];
+        $request->price = str_replace('.', '', $request->price);
+        $request->price = $request->price;
+        $request->tdp   = str_replace('.', '', $request->tdp);
+        $request->tdp   = $request->tdp;
+
+        try {
+            $product             = Products::findOrFail($id);
+            $product_installment = Products_installments::where('product_id', $id)->get();
+            if ($product_installment->isEmpty()) {
+                if (!empty($request->price_installment)) {
+                    foreach ($request->price_installment as $val_price) {
+                        $val_price = str_replace('.', '', $val_price);
+                        if (!empty($val_price)) {
+                            $post_installment[] = [
+                                'product_id'        => $id,
+                                'price_installment' => $val_price
+                            ];
+                        }
+                    }
+                }
+                Products_installments::insert($post_installment);
+            } else {
+                if (!empty($request->price_installment)) {
+                    foreach ($request->price_installment as $key => $val_price) {
+                        $val_price = str_replace('.', '', $val_price);
+                        Products_installments::where('id', $request->id_installment[$key])
+                        ->update(['price_installment' => $val_price]);
+                    }
+                }   
+            }
+
+            if ($request->hasFile('images'))
+            {
+                $files = [];
+                foreach ($request->file('images') as $file) {
+                    if ($file->isValid()) {
+                        $filename = round(microtime(true) * 1000).'-'.str_replace(' ','-',$file->getClientOriginalName());
+                        $file->storeAs('public/products', $filename);
+                        $files[] = [
+                            'images' => $filename,
+                        ];
+                    }
+                }
+
+                if (!empty($product->images)) {
+                    foreach ($product->images as $image) {
+                        //delete old image
+                        Storage::delete('public/products/'.$image['images']);
+                    }
                 }
             }
 
-            if (!empty($product->images)) {
-                foreach ($product->images as $image) {
-                    //delete old image
-                    Storage::delete('public/products/'.$image['images']);
-                }
-            }
+            $post = [
+                'product_type_id' => $request->product_type_id,
+                'promo_id'        => $request->promo_id,
+                'name'            => $request->name,
+                'price'           => $request->price,
+                'tdp'             => $request->tdp,
+                'specification'   => $request->specification,
+                'special_feature' => $request->special_feature,
+                'description'     => $request->description,
+                'is_active'       => !empty($request->is_active) ? 1 : 0,
+                'image'           => !empty($files) ? $files[0]['images'] : $product->image,
+                'images'          => $files ?? $product->images,
+            ];
+
+            $product->update($post);
+        } catch (Exception $e) {
+            dd($e);
         }
 
-        $post = [
-            'product_type_id' => $request->product_type_id,
-            'promo_id'        => $request->promo_id,
-            'name'            => $request->name,
-            'specification'   => $request->specification,
-            'special_feature' => $request->special_feature,
-            'description'     => $request->description,
-            'is_active'       => !empty($request->is_active) ? 1 : 0,
-            'image'           => !empty($files) ? $files[0]['images'] : $product->image,
-            'images'          => $files ?? $product->images,
-        ];
-
-        $product->update($post);
         return redirect()->route('admin.products_list')->with(['success' => sprintf('%s Berhasil Diupdate.', $request->name)]);
     }
 
@@ -443,6 +507,7 @@ class ProductsController extends Controller
             }
         }
 
+        Products_installments::where('product_id', $id)->delete();
         $product->delete();
         return redirect()->route('admin.products_list')->with(['success' => sprintf('%s Berhasil Dihapus.', $product->name)]);
     }

@@ -18,14 +18,14 @@
 	        <thead>
 	          <tr>
 	            <th>Tipe Mobil</th>
-	            <th>Harga Mobil</th>
+	            {{-- <th>Harga Mobil</th> --}}
 	            <th>Tahun</th>
 	          </tr>
 	        </thead>
 	        <tbody>
 	        	<tr>
 	        		<td>{{$item->product_type->name}}</td>
-	        		<td>Rp.{{Helper::helper_number_format($item->product_type->price)}}</td>
+	        		{{-- <td>Rp.{{Helper::helper_number_format($item->product_type->price)}}</td> --}}
 	        		<td>{{$item->product_type->years}}</td>
 	        	</tr>
 	        </tbody>

@@ -86,6 +86,26 @@
             </div>
 
             <div class="form-group">
+              <label for="tdp">Total Down Payment (TDP)</label>
+              <input type="text" class="form-control" id="tdp" name="tdp" placeholder="Harga Mobil">
+            </div>
+
+            <div class="form-group">
+              <label for="price_installment">Angsuran 1</label>
+              <input type="text" class="form-control" id="price_installment_1" name="price_installment[]" placeholder="Angsuran 1">
+            </div>
+
+            <div class="form-group">
+              <label for="price_installment">Angsuran 2</label>
+              <input type="text" class="form-control" id="price_installment_2" name="price_installment[]" placeholder="Angsuran 2">
+            </div>
+
+            <div class="form-group">
+              <label for="price_installment">Angsuran 3</label>
+              <input type="text" class="form-control" id="price_installment_3" name="price_installment[]" placeholder="Angsuran 3">
+            </div>
+
+            <div class="form-group">
               <label for="specification">Spesifikasi Mobil</label>
               <textarea id="summernote" name="specification"></textarea>
             </div>
@@ -127,13 +147,21 @@
 @section('script')
   <script type="text/javascript">
     $(document).ready(function(){
-      $('body').on('keyup', '#price', function(event) {
-        if(event.which >= 37 && event.which <= 40) return;
-        // format number
-        $(this).val(function(index, value) {
-          return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      number_custom('#price');
+      number_custom('#tdp');
+      number_custom('#price_installment_1');
+      number_custom('#price_installment_2');
+      number_custom('#price_installment_3');
+
+      function number_custom(index) {
+        $('body').on('keyup', index, function(event) {
+          if(event.which >= 37 && event.which <= 40) return;
+          // format number
+          $(this).val(function(index, value) {
+            return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+          });
         });
-      });
+      }
 
       $('#summernote').summernote({
         height: 300,
