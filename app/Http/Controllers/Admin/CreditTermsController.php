@@ -11,12 +11,15 @@ use Illuminate\Support\Facades\Storage;
 class CreditTermsController extends Controller
 {
     protected $credits;
+    protected $tenors;
 
-    public function __construct(Credit $credits)
+    public function __construct(Credit $credits, Tenor $tenors)
     {
         $this->credits   = $credits->get();
+        $this->tenors    = $tenors->get();
         $this->data_view = [
-            'credits' => $this->credits
+            'credits' => $this->credits,
+            'tenors'  => $this->tenors
         ];
     }
 
@@ -45,6 +48,15 @@ class CreditTermsController extends Controller
         ];
 
         return view('admin.credits.credit_terms_create', $data);
+    }
+
+    public function tenor_create()
+    {
+        $data = [
+            'title' => 'Tenor Baru'
+        ];
+
+        return view('admin.credits.tenor_create', $data);
     }
 
     /**
@@ -83,6 +95,26 @@ class CreditTermsController extends Controller
         return redirect()->route('admin.credit_terms')->with(['success' => sprintf('Syarat Kredit Berhasil Disimpan.')]);
     }
 
+    public function tenor_store(Request $request)
+    {
+        $this->validate($request, [
+            'tenor' => 'required',
+            'unit'  => 'required'
+        ],[
+            'tenor.required' => 'tenor tidak boleh kosong',
+            'unit.required'  => 'jangka waktu tenor tidak boleh kosong'
+        ]);
+
+        $post = [
+            'tenor'     => $request->tenor,
+            'unit'      => $request->unit,
+            'is_active' => !empty($request->is_active) ? 1 : 0,
+        ];
+
+        Tenor::create($post);
+        return redirect()->route('admin.tenor')->with(['success' => sprintf('Tenor Berhasil Disimpan.')]);
+    }
+
     /**
      * Display the specified resource.
      */
@@ -100,6 +132,14 @@ class CreditTermsController extends Controller
         $this->data_view['title'] = 'Syarat Kredit Edit';
 
         return view('admin.credits.credit_terms_edit', $this->data_view);
+    }
+
+    public function tenor_edit($id)
+    {
+        $this->data_view['item']  = Tenor::findOrFail($id);
+        $this->data_view['title'] = 'Syarat Kredit Edit';
+
+        return view('admin.credits.tenor_edit', $this->data_view);
     }
 
     /**
@@ -162,6 +202,43 @@ class CreditTermsController extends Controller
         }
     }
 
+    public function tenor_update_active(Request $request, $id){
+        if (request()->ajax()) {
+            $tenor            = Tenor::findOrFail($id);
+            $tenor->is_active = $request->is_checked;
+            $text_active        = empty($request->is_checked) ? 'menonaktifkan' : 'mengaktifkan';
+            if (!$tenor->update()) {
+                return response()->json([
+                    'message' => 'Gagal '.$text_active.' Tenor',
+                ]);
+            }
+            return response()->json([
+                    'message' => 'Berhasil '.$text_active.' Tenor',
+            ]);
+        }
+    }
+
+
+    public function tenor_update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'tenor' => 'required',
+            'unit'  => 'required'
+        ],[
+            'tenor.required' => 'tenor tidak boleh kosong',
+            'unit.required'  => 'jangka waktu tenor tidak boleh kosong'
+        ]);
+
+        $tenor = Tenor::findOrFail($id);
+        $post  = [
+            'tenor'     => $request->tenor,
+            'unit'      => $request->unit,
+            'is_active' => !empty($request->is_active) ? 1 : 0,
+        ];
+        $tenor->update($post);
+        return redirect()->route('admin.tenor')->with(['success' => sprintf('Tenor Berhasil Diupdate.')]);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -178,5 +255,12 @@ class CreditTermsController extends Controller
 
         $credit->delete();
         return redirect()->route('admin.credit_terms')->with(['success' => sprintf('Syarat Kredit Berhasil Dihapus.')]);
+    }
+
+    public function tenor_destroy($id)
+    {
+        $tenor = Tenor::findOrFail($id);
+        $tenor->delete();
+        return redirect()->route('admin.tenor')->with(['success' => sprintf('Tenor Berhasil Dihapus.')]);
     }
 }

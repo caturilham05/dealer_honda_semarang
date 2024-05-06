@@ -89,6 +89,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/admin/credit/credit-terms/{id}', [CreditTermsController::class, 'credit_terms_destroy'])->name('admin.credit_terms_destroy');
     
     Route::get('/admin/credit/tenor', [CreditTermsController::class, 'tenor'])->name('admin.tenor');
+    Route::get('/admin/credit/tenor/create', [CreditTermsController::class, 'tenor_create'])->name('admin.tenor_create');
+    Route::get('/admin/credit/tenor/edit/{id}', [CreditTermsController::class, 'tenor_edit'])->name('admin.tenor_edit');
+    Route::put('/admin/credit/tenor/edit/{id}', [CreditTermsController::class, 'tenor_update'])->name('admin.tenor_update');
+    Route::put('/admin/credit/tenor/edit/{id}/set-active', [CreditTermsController::class, 'tenor_update_active'])->name('admin.tenor_update_active');
+    Route::post('/admin/credit/tenor/create', [CreditTermsController::class, 'tenor_store'])->name('admin.tenor_store');
+    Route::delete('/admin/credit/tenor/{id}', [CreditTermsController::class, 'tenor_destroy'])->name('admin.tenor_destroy');
     /*Credit*/
 
     Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user');
