@@ -1,63 +1,39 @@
 @extends('public.layout.public')
 
 @section('content')
-  <div class="container-xxl py-5">
-      <div class="container">
-          <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-              <h6 class="text-primary text-uppercase">Katalog</h6>
-              <h1 class="mb-5 text-uppercase">{{$title}}</h1>
-          </div>
-          <div class="row g-4" id="promo_list">
-						@if (empty($promos))
-							<h4 class="text-primary text-uppercase text-center">Daftar Mobil tidak ditemukan</h4>          		
-						@else
-							@php
-								$delay = 0.02;
-							@endphp
-							@foreach ($promos as $promo)
-								@php
-						      $description = substr_replace($promo['description'], '...', 20);
-						      $delay += $delay;
-								@endphp
-						    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="{!!$delay!!}s">
-						        <div class="team-item">
-						          <div class="position-relative overflow-hidden">
-						            <img class="img-fluid" src="{{asset('/storage/promo/'.$promo['image'])}}" alt="{{$promo['name']}}" style="height: 200px;">
-						            <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
-						              <p class="mb-0" style="color: #fff !important;">{!! $description ?? '-'!!}</p>
-						            </div>
-						          </div>
-						          <div class="bg-light text-center p-4 text-uppercase">
-						            <a href="{{route('public.promo_detail', $promo['id'])}}"><h5 class="fw-bold mb-0">{{$promo['name']}}</h5></a>
-						            <small>Rp.{{Helper::helper_number_format($promo['price'])}}</small>
-						          </div>
-						        </div>
-						    </div>
-							@endforeach
-						@endif
+	@php
+	$img_not_found = 'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg';
+	@endphp
+  <!-- Page Header Start -->
+  <div class="container-fluid page-header mb-5 p-0" style="background-color: grey">
+  {{-- <div class="container-fluid page-header mb-5 p-0" style="background-image: url({{asset('/storage/promo/'.$promos['image'])}});"> --}}
+      <div class="container-fluid page-header-inner py-5">
+          <div class="container text-center">
+              <h1 class="text-uppercase display-3 text-white mb-3 animated slideInDown">{{$promos['name']}}</h1>
+              @if (!empty($promos['price']))                
+                <h5 class="text-uppercase text-white mb-3 animated slideInDown">Rp.{{Helper::helper_number_format($promos['price'])}}</h5>
+              @endif
           </div>
       </div>
   </div>
-@endsection
+  <!-- Page Header End -->
+  @if (!empty($promos['images']))  
+  	<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+      <div class="container">
+        <div class="owl-carousel testimonial-carousel position-relative">
+          	@foreach ($promos['images'] as $image)        		
+              <div class="testimonial-item text-center">
+                <img class="card-img bg-light p-1 mx-auto mb-3" src="{{asset('/storage/promo/'.$image['images'])}}">
+              </div>
+          	@endforeach
+        </div>
+      </div>
+  	</div>
+  @endif
 
-{{-- @section('script')
-	<script type="text/javascript">
-	    $(document).ready(function(){
-	    	$.ajax({
-	    		url: `/promo/items`,
-	    		type: 'GET',
-	    		dataType: 'json',
-	    		beforeSend:function(){
-	    			$('#product_list').html(`
-	    				<center>
-	    					<span>Loading...</span>
-	    				</center>
-	    			`);
-	    		},
-	    		success:function(res){
-	    			$('#product_list').html(res.html);
-	    		}
-	    	})
-	    })
-	</script>
-@endsection --}}
+  <div class="container-xxl py-1">
+    <div class="container">
+        {!!$promos['description']!!}
+    </div>
+  </div>
+@endsection

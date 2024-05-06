@@ -46,8 +46,9 @@
 
             <div class="form-group">
               <label for="description">Deskripsi Promo</label>
-              <textarea class="form-control" rows="3" name="description" placeholder="Deskripsi Promo"></textarea>
+              <textarea id="summernote" name="description"></textarea>
             </div>
+
             <div class="form-group">
               <label for="images">Unggah Gambar</label>
               <div class="col-md-6">
@@ -78,6 +79,12 @@
 		    return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 		  });
 		});
+
+    $('#summernote').summernote({
+      height: 300,
+      focus: false
+    })
+
 	})
 </script>
 @endsection

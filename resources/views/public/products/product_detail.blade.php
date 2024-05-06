@@ -2,6 +2,7 @@
 
 @section('content')
 		@php
+    // dd($product_detail['products_installments']);
 		$img_not_found     = 'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg';
     $price_promo       = !empty($product_detail['promo']) ? $product_detail['price'] - $product_detail['promo']['price'] : 0;
     $price_promo_style = 'text-decoration: line-through;';
@@ -48,6 +49,9 @@
                   <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill" data-bs-target="#tab-pane-3" type="button">
                     <h4 class="m-0">Deskripsi</h4>
                   </button>
+                  <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill" data-bs-target="#tab-pane-4" type="button">
+                    <h4 class="m-0">Cicilan / Kredit</h4>
+                  </button>
               </div>
           </div>
           <div class="col-lg-8">
@@ -70,6 +74,37 @@
                       <div class="row g-4">
                           <div class="col-md-12">
                           	<span>{!! $product_detail['description'] !!}</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="tab-pane fade" id="tab-pane-4">
+                      <div class="row g-4">
+                          <div class="col-md-12">
+                            @if (!empty($product_detail['products_installments']))
+                              <div class="table">
+                                <table class="table table-responsive table-bordered table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th>Tenor</th>
+                                      <th>Angsuran</th>
+                                      <th>TDP</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    @foreach ($product_detail['products_installments'] as $item)
+                                      <tr>
+                                        <td width="30%">{{$item['tenor']['tenor'].' '.$item['tenor']['unit']}}</td>
+                                        <td width="30%">{{Helper::helper_number_format($item['price_installment'])}}</td>
+                                        <td width="30%">{{Helper::helper_number_format($item['tdp'])}}</td>
+                                      </tr>
+                                    @endforeach
+                                  </tbody>
+                                </table>
+                              </div>
+                              <a href="{{route('public.credits.credit_simulation')}}" class="btn btn-primary py-3 px-5">Simulasi Kredit<i class="fa fa-arrow-right ms-3"></i></a>
+                            @else
+                              <h3>Cicilan / Kredit tidak tersedia</h3>
+                            @endif
                           </div>
                       </div>
                   </div>

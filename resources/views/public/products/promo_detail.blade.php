@@ -10,31 +10,33 @@
             <div class="container text-center">
 				        <h6 class="text-white text-uppercase animated slideInDown">Detail Promo</h6>
                 <h1 class="text-uppercase display-3 text-white mb-3 animated slideInDown">{{$promo_detail['name']}}</h1>
-                <h5 class="text-uppercase text-white mb-3 animated slideInDown">Rp.{{Helper::helper_number_format($promo_detail['price'])}}</h5>
+                @if (!empty($promo_detail['price']))                
+                  <h5 class="text-uppercase text-white mb-3 animated slideInDown">Rp.{{Helper::helper_number_format($promo_detail['price'])}}</h5>
+                @endif
             </div>
         </div>
     </div>
     <!-- Page Header End -->
-
-	<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-    <div class="container">
-      <div class="owl-carousel testimonial-carousel position-relative">
-        	@foreach ($promo_detail['images'] as $image)        		
-            <div class="testimonial-item text-center">
-              <img class="card-img bg-light p-1 mx-auto mb-3" src="{{asset('/storage/promo/'.$image['images'])}}">
-            </div>
-        	@endforeach
+  @if (!empty($promo_detail['images']))  
+  	<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+      <div class="container">
+        <div class="owl-carousel testimonial-carousel position-relative">
+          	@foreach ($promo_detail['images'] as $image)        		
+              <div class="testimonial-item text-center">
+                <img class="card-img bg-light p-1 mx-auto mb-3" src="{{asset('/storage/promo/'.$image['images'])}}">
+              </div>
+          	@endforeach
+        </div>
       </div>
-    </div>
-	</div>
+  	</div>
+  @endif
 
   <div class="container-xxl py-1">
     <div class="container">
-        {{$promo_detail['description']}}
+        {!!$promo_detail['description']!!}
     </div>
-    <hr>
   </div>
-  <div class="container-xxl py-5">
+  {{-- <div class="container-xxl py-5">
       <div class="container">
           <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
               <h1 class="mb-5 text-uppercase">Daftar Mobil</h1>
@@ -47,7 +49,7 @@
                 $delay = 0.02;
               @endphp
               @foreach ($products as $product)
-                @if (!empty($product['promo']) && $product['promo_id'] == $promo_detail['id'])              
+                @if (!empty($product['promo']) && $product['promo_id'] == $promo_detail['id'])
                   @php
                     $description = substr_replace($product['description'], '...', 20);
                     $delay      += $delay;
@@ -74,7 +76,7 @@
             @endif
           </div>
       </div>
-  </div>
+  </div> --}}
 
 
 

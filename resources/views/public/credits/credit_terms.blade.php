@@ -7,9 +7,11 @@
               <h6 class="text-primary text-uppercase">Katalog</h6>
               <h1 class="mb-5 text-uppercase">{{$title}}</h1>
           </div>
-          <div style="display: flex; justify-content: center; align-items: center;">
-	          <img src="{{asset('/storage/credit_terms/'.$credits['image'])}}" style="background-size: cover; background-repeat: no-repeat; background-position: center center;  width: 70%;">
-          </div>
+          @if (!empty($credits['image']))          
+            <div style="display: flex; justify-content: center; align-items: center;">
+  	          <img src="{{asset('/storage/credit_terms/'.$credits['image'])}}" style="background-size: cover; background-repeat: no-repeat; background-position: center center;  width: 70%;">
+            </div>
+          @endif
           <div class="mt-5">
 	          {!!$credits['description']!!}
           </div>

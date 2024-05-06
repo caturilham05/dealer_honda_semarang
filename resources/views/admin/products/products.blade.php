@@ -73,7 +73,7 @@
                             <td>{{$item->product_type->name}}</td>
                             <td>Rp.{{Helper::helper_number_format($item->price)}}</td>
                             <td>{{$item->promo->name ?? '-'}}</td>
-                            <td>{!! Helper::helper_nl2br($specification) ?? '-' !!}</td>
+                            <td>{!! $specification ?? '-' !!}</td>
                             <td>
                                 @if (!empty($item->image))
                                   <img src="{{ asset('/storage/products/'.$item->image) }}" style="width: 150px">

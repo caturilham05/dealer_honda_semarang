@@ -44,7 +44,7 @@
 	                    <h5 class="mb-0"><a href="">{{$product['name']}}</a></h5>
 	                    <p>Rp.{{Helper::helper_number_format($product['price'])}}</p>
 	                    <div class="testimonial-text bg-light text-center p-4">
-		                    <p class="mb-0">{{$description ?? '-'}}</p>
+		                    <p class="mb-0">{!!$description ?? '-'!!}</p>
 	                    </div>
 			            </div>
 	        			@endforeach

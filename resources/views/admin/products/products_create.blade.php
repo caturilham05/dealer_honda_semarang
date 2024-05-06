@@ -47,24 +47,6 @@
               </div>
             @endif
 
-            @if ($promos->isEmpty())
-              <div class="mb-3">
-                <span style="color: red;"><b>promo tidak ditemukan. Silahkan tambah promo terlebih dahulu</b></span>
-                <a href="{{route('admin.products.promo_create')}}" style="text-decoration: underline;"> Tambah promo baru</a>
-              </div>
-            @else
-              <div class="form-group">
-                <label>Promo</label>
-                <select class="form-control" name="promo_id">
-                  <option value="">Pilih Promo</option>
-                  @foreach ($promos as $item)
-                    <option value="{{$item->id}}">{{$item->name}}</option>
-                  @endforeach
-                </select>
-                <span><a href="{{route('admin.products.promo_create')}}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah promo baru</a></span>
-              </div>
-            @endif
-
             <div class="form-group">
               <label for="name">Nama Mobil</label>
               <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nama Mobil">

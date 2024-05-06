@@ -25,9 +25,9 @@ class ProductController extends Controller
     )
     {
         $this->contacts     = $contacts->get()->first()->toArray();
-        $this->products     = $products->with(['product_type', 'promo'])->where('is_active', 1)->orderBy('id', 'desc')->get()->toArray();
+        $this->products     = $products->with(['product_type', 'promo', 'products_installments.tenor'])->where('is_active', 1)->orderBy('id', 'desc')->get()->toArray();
         $this->product_type = $productType->where('is_active', 1)->orderBy('id', 'desc')->get()->toArray();
-        $this->promo        = $promo->where('is_active', 1)->orderBy('id', 'desc')->get()->toArray();
+        $this->promo        = $promo->where('is_active', 1)->orderBy('id', 'desc')->get()->first()->toArray();
         $this->data_view    = [
             'contact'      => $this->contacts,
             'products'     => $this->products,
@@ -103,7 +103,7 @@ class ProductController extends Controller
 
     public function detail($id)
     {
-        $this->data_view['product_detail'] = Products::with(['product_type', 'promo'])->where('id', $id)->first()->toArray();
+        $this->data_view['product_detail'] = Products::with(['product_type', 'promo', 'products_installments.tenor'])->where('id', $id)->first()->toArray();
         return view('public.products.product_detail', $this->data_view);
     }
 

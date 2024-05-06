@@ -60,7 +60,7 @@
                   <tr>
                       <td width="20%">{{$item->name}}</td>
                       <td width="10%">{{Helper::helper_number_format($item->price)}}</td>
-                      <td width="20%">{{substr_replace($item->description, ' ...', 30)}}</td>
+                      <td width="20%">{!!substr_replace($item->description, ' ...', 30)!!}</td>
                       <td>
                         @if (!empty($item->image))
                           <img src="{{ asset('/storage/promo/'.$item->image) }}" style="width: 150px">

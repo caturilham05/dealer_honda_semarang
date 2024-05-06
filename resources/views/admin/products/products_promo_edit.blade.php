@@ -43,15 +43,12 @@
                   </div>
               @enderror
             </div>
+
             <div class="form-group">
               <label for="description">Deskripsi Promo</label>
-              <textarea class="form-control" rows="3" name="description" placeholder="Deskripsi Promo">{{old('description', $item['description'])}}</textarea>
-              {{-- @error('description')
-                  <div class="alert alert-danger mt-2">
-                      {{ $message }}
-                  </div>
-              @enderror --}}
+              <textarea id="summernote" name="description">{{old('description', $item['description'])}}</textarea>
             </div>
+
             <div class="form-group">
               <label for="images">Unggah Gambar</label>
               <div class="col-md-6">
@@ -87,6 +84,11 @@
 		    return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 		  });
 		});
+
+    $('#summernote').summernote({
+      height: 300,
+      focus: false
+    })
 	})
 </script>
 @endsection
