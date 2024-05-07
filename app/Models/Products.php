@@ -15,17 +15,18 @@ class Products extends Model
         'promo_id',
         'name',
         'price',
-        // 'tdp',
         'specification',
         'special_feature',
         'description',
         'image',
         'images',
+        'brochure',
         'is_active'
     ];
 
     protected $casts = [
-        'images' => 'array'
+        'images'   => 'array',
+        'brochure' => 'array'
     ];
 
     public function product_type()

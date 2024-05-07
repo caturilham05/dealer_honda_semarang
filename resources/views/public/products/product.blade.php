@@ -9,6 +9,7 @@
           </div>
 				  @include('public.partials.product_filter')
           <div class="row g-4" id="product_list"></div>
+          {{-- <div class="container-flex-products-list" id="product_list"></div> --}}
       </div>
   </div>
 @endsection

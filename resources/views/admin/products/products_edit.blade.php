@@ -75,41 +75,6 @@
             <label>Angsuran</label>
             @include('admin.products.products_create_installment', ['tenors' => $tenors])
 
-
-            {{-- <div class="form-group">
-              <label for="tdp">Total Down Payment</label>
-              <input type="text" class="form-control" id="tdp" name="tdp" value="{{old('name', $product['tdp'])}}" placeholder="TDP">
-            </div>
-
-            @if ($product->products_installments->isEmpty())
-              <div class="form-group">
-                <label for="price_installment">Angsuran 1</label>
-                <input type="text" class="form-control" id="price_installment_1" name="price_installment[]" placeholder="Angsuran 1">
-              </div>
-
-              <div class="form-group">
-                <label for="price_installment">Angsuran 2</label>
-                <input type="text" class="form-control" id="price_installment_2" name="price_installment[]" placeholder="Angsuran 2">
-              </div>
-
-              <div class="form-group">
-                <label for="price_installment">Angsuran 3</label>
-                <input type="text" class="form-control" id="price_installment_3" name="price_installment[]" placeholder="Angsuran 3">
-              </div>
-            @else
-              @php
-                $key = 1;
-              @endphp
-              @foreach ($product->products_installments as $item)
-                <div class="form-group">
-                  <label for="price_installment">Angsuran {{$key++}}</label>
-                  <input type="hidden" class="form-control" id="id_installment" name="id_installment[]" placeholder="Angsuran {{$key}}" value="{{$item['id']}}">
-                  <input type="text" class="form-control" id="price_installment_{{$key}}" name="price_installment[]" placeholder="Angsuran {{$key}}" value="{{$item['price_installment']}}">
-                </div>
-              @endforeach
-            @endif --}}
-
-
             <div class="form-group">
               <label for="specification">Spesifikasi Mobil</label>
               <textarea id="summernote" name="specification">{{old('specification', $product['specification'])}}</textarea>
@@ -129,6 +94,13 @@
               <label for="images">Unggah Gambar Mobil</label>
               <div class="col-md-6">
                 <input type="file" class="form-control" name="images[]" multiple>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="brochure">Unggah Brosur Mobil (PDF)</label>
+              <div class="col-md-6">
+                <input type="file" class="form-control" name="brochure[]" multiple>
               </div>
             </div>
 

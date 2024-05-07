@@ -1,3 +1,19 @@
+.container-flex-products-list{
+   display: flex;
+   align-items: center;
+   flex-wrap: wrap;
+   padding: 1rem;
+}
+
+.card-products-list{
+
+}
+
+.brochure-detail{
+   display: flex;
+   flex-direction: column;
+}
+
 .card-img {
    background-size: cover;
    background-repeat: no-repeat;
@@ -14,10 +30,31 @@
    width: 5%;
 }
 
+.img-custom{
+   height: 200px;
+}
+
+.redirect_wa{
+    position: fixed;
+    display: block;
+    right: 45px;
+    bottom: 45px;
+    z-index: 9999;
+}
+
 
 @media screen and (max-width: 480px){
    .logo_wa_car_detail{
       width: 10%;
+   }
+
+   .team-item{
+      /*margin: auto;*/
+      /*width: 60%;*/
+   }
+
+   .img-custom{
+      height: auto;
    }
 }
 

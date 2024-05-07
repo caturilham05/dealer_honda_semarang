@@ -63,11 +63,21 @@
     		<hr>
     	</div>
     	<div class="container">
+    		@if (!empty($item->brochure))
+		    	<div style="display: flex; flex-wrap: wrap;">
+		    		@foreach ($item->brochure as $value)
+		    			<div style="margin: 1rem;">
+								<a href="{{ asset('/storage/products/brochure/'.$value['brochure']) }}" target="_blank">Lihat Brosur<br>{{$value['brochure']}}</a>
+		    			</div>
+		    		@endforeach
+		    	</div>    			
+    		@endif
     		@if (!empty($item->images))
 		    	<div style="display: flex; flex-wrap: wrap;">
 		    		@foreach ($item->images as $value)
 							<div class="card" style="width: 15rem; margin: 0.5rem;">
 							  <img class="card-img-top" src="{{ asset('/storage/products/'.$value['images']) }}" alt="{{$value['images']}}">
+							  {{-- <iframe src="{{ asset('/laraview/products/'.$value['images']) }}"></iframe> --}}
 							</div>	    			
 		    		@endforeach
 		    	</div>

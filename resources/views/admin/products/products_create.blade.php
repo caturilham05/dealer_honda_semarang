@@ -92,6 +92,13 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <label for="brochure">Unggah Brosur Mobil (PDF)</label>
+              <div class="col-md-6">
+                <input type="file" class="form-control" name="brochure[]" multiple>
+              </div>
+            </div>
+
             <div class="form-check">
               <input type="checkbox" name="is_active" class="form-check-input" id="is_active">
               <label class="form-check-label" for="is_active">Aktif / Tidak Aktif</label>

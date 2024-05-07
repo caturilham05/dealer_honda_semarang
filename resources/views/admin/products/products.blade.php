@@ -77,10 +77,18 @@
                             <td>
                                 @if (!empty($item->image))
                                   <img src="{{ asset('/storage/products/'.$item->image) }}" style="width: 150px">
+                                  {{-- <iframe src="{{ asset('/storage/products/'.$item->image) }}"></iframe> --}}
                                 @else
                                   -
                                 @endif
                             </td>
+                            {{-- <td>
+                                @if (!empty($item->image))
+                                  <img src="{{ asset('/storage/products/'.$item->image) }}" style="width: 150px">
+                                @else
+                                  -
+                                @endif
+                            </td> --}}
                             <td>
                                 <input type="checkbox" name="is_active" value="{{$item->is_active}}" data-id="{{$item->id}}" class="checkbox" {{$item->is_active == 1 ? 'checked' : ''}}>
                                 <label class="form-check-label" for="is_active">{{!empty($item->is_active) ? 'Aktif' : 'Tidak Aktif'}}</label>

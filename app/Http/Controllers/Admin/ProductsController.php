@@ -130,18 +130,32 @@ class ProductsController extends Controller
                 }
             }
 
+            if ($request->hasFile('brochure'))
+            {
+                $brochure = [];
+                foreach ($request->file('brochure') as $file_brochure) {
+                    if ($file_brochure->isValid()) {
+                        $filename_brochure = round(microtime(true) * 1000).'-'.str_replace(' ','-',$file_brochure->getClientOriginalName());
+                        $file_brochure->storeAs('public/products/brochure', $filename_brochure);
+                        $brochure[] = [
+                            'brochure' => $filename_brochure,
+                        ];
+                    }
+                }
+            }
+
             $post = [
                 'product_type_id' => $request->product_type_id,
                 'promo_id'        => $request->promo_id,
                 'name'            => $request->name,
                 'price'           => $request->price,
-                // 'tdp'          => $request->tdp,
                 'specification'   => $request->specification,
                 'special_feature' => $request->special_feature,
                 'description'     => $request->description,
                 'is_active'       => !empty($request->is_active) ? 1 : 0,
                 'image'           => !empty($files) ? $files[0]['images'] : null,
                 'images'          => $files ?? NULL,
+                'brochure'        => $brochure ?? NULL,
             ];
 
             $last_id = Products::create($post);
@@ -356,6 +370,27 @@ class ProductsController extends Controller
                 }
             }
 
+            if ($request->hasFile('brochure'))
+            {
+                $brochure = [];
+                foreach ($request->file('brochure') as $file_brochure) {
+                    if ($file_brochure->isValid()) {
+                        $filename_brochure = round(microtime(true) * 1000).'-'.str_replace(' ','-',$file_brochure->getClientOriginalName());
+                        $file_brochure->storeAs('public/products/brochure', $filename_brochure);
+                        $brochure[] = [
+                            'brochure' => $filename_brochure,
+                        ];
+                    }
+                }
+
+                if (!empty($product->brochure)) {
+                    foreach ($product->brochure as $image) {
+                        //delete old image
+                        Storage::delete('public/products/brochure/'.$image['brochure']);
+                    }
+                }
+            }
+
             $post = [
                 'product_type_id' => $request->product_type_id,
                 'promo_id'        => $request->promo_id,
@@ -367,6 +402,7 @@ class ProductsController extends Controller
                 'is_active'       => !empty($request->is_active) ? 1 : 0,
                 'image'           => !empty($files) ? $files[0]['images'] : $product->image,
                 'images'          => $files ?? $product->images,
+                'brochure'        => $brochure ?? $product->brochure,
             ];
 
             $product->update($post);
