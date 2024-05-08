@@ -13,10 +13,6 @@
           <div class="container text-center">
 			        <h6 class="text-white text-uppercase animated slideInDown">Detail Mobil</h6>
               <h1 class="text-uppercase display-3 text-white mb-3 animated slideInDown">{{$product_detail['name']}}</h1>
-              {{-- <h5 class="text-uppercase text-white mb-3 animated slideInDown" style="{{!empty($product_detail['promo']) ? $price_promo_style : ''}}">Rp.{{Helper::helper_number_format($product_detail['price'])}}</h5> --}}
-              {{-- @if (!empty($product_detail['promo']))
-                <h5 class="text-uppercase text-white mb-3 animated slideInDown">Rp.{{Helper::helper_number_format($price_promo)}}</h5>
-              @endif --}}
           </div>
       </div>
   </div>
@@ -24,19 +20,19 @@
 
   <div class="container-xxl service py-5">
     <div class="container">
-      <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s">
+      <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -70px">
           <div class="col-lg-4">
               <div class="nav w-100 nav-pills me-4">
-                  <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4 active" data-bs-toggle="pill" data-bs-target="#tab-pane-1" type="button">
+                  <button class="nav-link w-100 d-flex align-items-center text-start p-3 active" style="margin-bottom: 1rem" data-bs-toggle="pill" data-bs-target="#tab-pane-1" type="button">
                     <h4 class="m-0">Harga Mobil</h4>
                   </button>
-                  <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill" data-bs-target="#tab-pane-2" type="button">
+                  <button class="nav-link w-100 d-flex align-items-center text-start p-3" style="margin-bottom: 1rem" data-bs-toggle="pill" data-bs-target="#tab-pane-2" type="button">
                     <h4 class="m-0">Brosur</h4>
                   </button>
-                  <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill" data-bs-target="#tab-pane-3" type="button">
+                  <button class="nav-link w-100 d-flex align-items-center text-start p-3" style="margin-bottom: 1rem" data-bs-toggle="pill" data-bs-target="#tab-pane-3" type="button">
                     <h4 class="m-0">Spesifikasi</h4>
                   </button>
-                  <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill" data-bs-target="#tab-pane-4" type="button">
+                  <button class="nav-link w-100 d-flex align-items-center text-start p-3" style="margin-bottom: 1rem" data-bs-toggle="pill" data-bs-target="#tab-pane-4" type="button">
                     <h4 class="m-0">Deskripsi</h4>
                   </button>
               </div>
@@ -62,7 +58,6 @@
                                         <td width="40%">
                                           <a href="{{route('public.product_detail', $item['id'])}}"><h6 class="fw-bold mb-0">{{$item['name']}}</h6></a>
                                         </td>
-                                        {{-- <td width="40%">{{$item['name'].' '.$item['id']}}</td> --}}
                                         <td>{{Helper::helper_number_format($item['price'])}}</td>
                                         <td>
                                           <center>
@@ -88,12 +83,24 @@
                                 @foreach ($product_detail['brochure'] as $value)
                                   <div style="margin-bottom: 1rem;">
                                     <a href="{{ asset('/storage/products/brochure/'.$value['brochure']) }}" download>Download Brosur<br>{{$value['brochure']}}</a>
-                                    <iframe src="{{ asset('/storage/products/brochure/'.$value['brochure']) }}" width="100%" height="600px"></iframe>
                                   </div>
                                 @endforeach
                               </div>          
                             @else
                               <h1>Brosur Tidak Tersedia</h1>
+                            @endif
+
+                            @if (!empty($product_detail['images']))
+                              {{-- <div class="owl-carousel testimonial-carousel position-relative"> --}}
+                                @foreach ($product_detail['images'] as $key => $image)
+                                  {{-- <div class="testimonial-item text-center"> --}}
+                                    <img class="card-img bg-light p-2 mx-auto mb-3" src="{{asset('/storage/products/'.$image['images'])}}" id="imgShowDetail_{{$key}}">
+                                    @include('public.partials.image_fullscreen', ['image' => $image['images'], 'key' => $key, 'path' => '/storage/products/'])
+                                  {{-- </div> --}}
+                                @endforeach
+                              {{-- </div> --}}
+                            @else
+                              <h1>Gambar tidak ditemukan</h1>
                             @endif
                           </div>
                       </div>
@@ -123,29 +130,17 @@
   </div>
 @endsection
 
-{{-- @section('script')
+@section('script')
 	<script type="text/javascript">
 	    $(document).ready(function(){
-	    	let car_cat = $('#product_car_cat').data('car_cat');
-	    	car(car_cat)
-	      async function car(id)
-	      {
-		    	await $.ajax({
-		    		url: `/product-list/items/${id}`,
-		    		type: 'GET',
-		    		dataType: 'json',
-		    		beforeSend:function(){
-		    			$('#product_car_cat').html(`
-		    				<center>
-		    					<span>Loading...</span>
-		    				</center>
-		    			`);
-		    		},
-		    		success:function(res){
-		    			$('#product_car_cat').html(res.html);
-		    		}
-		    	})
-	      }
+        $('.card-img').each((index, item) => {
+          $(`#imgShowDetail_${index}`).on('click', function(){
+            $(`#imageFullscreen_${index}`).modal('show')
+          })
+        })
+        // $('#imgShowDetail').on('click', function(){
+        //   $('#imageFullscreen').modal('show')
+        // })
 	    })
 	</script>
-@endsection --}}
+@endsection

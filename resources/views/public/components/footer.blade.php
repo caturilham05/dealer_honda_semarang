@@ -13,14 +13,6 @@
                 <h6 class="text-light">Sabtu - Minggu:</h6>
                 <p class="mb-0">09.00 AM - 12.00 PM</p>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <h4 class="text-light mb-4">Newsletter</h4>
-                <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                <div class="position-relative mx-auto" style="max-width: 400px;">
-                    <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Email Anda">
-                    <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Kirim</button>
-                </div>
-            </div>
         </div>
     </div>
     <div class="container">

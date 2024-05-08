@@ -37,8 +37,8 @@
 .redirect_wa{
     position: fixed;
     display: block;
-    right: 45px;
-    bottom: 45px;
+    right: 50px;
+    bottom: 50px;
     z-index: 9999;
 }
 

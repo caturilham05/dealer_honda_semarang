@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index()
     {
         $imageslider = Images::orderBy('id', 'asc')->get()->toArray();
-        $content     = Content::with(['content_type'])->orderBy('id', 'asc')->get()->toArray();
+        $content     = Content::with(['content_type'])->orderBy('id', 'Desc')->get()->toArray();
         $product     = Products::with(['product_type', 'promo'])->where('is_active', 1)->orderBy('id', 'asc')->skip(0)->take(5)->get()->toArray();
         $testimonial = Testimonial::orderBy('id', 'desc')->get()->toArray();
         $data    = [
