@@ -56,10 +56,17 @@
    .img-custom{
       height: auto;
    }
+
+   .card-img{
+      max-width: 400px;
+   }
 }
 
 @media screen and (max-width: 800px){
    .logo_wa_car_detail{
       width: 30%;
+   }
+   .card-img{
+      max-width: 400px;
    }
 }

@@ -31,7 +31,7 @@
       </div>
   </div>
 
-  <div class="container-xxl service py-1">
+  <div class="container-xxl service py-1" style="margin-top: -250px">
       <div class="container">
       	@foreach ($datas as $item)
       			@if ($item['content_type_id'] == 1)

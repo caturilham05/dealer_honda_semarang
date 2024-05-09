@@ -105,8 +105,10 @@ class ContactController extends Controller
         }
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        // code...
+        $contact = Contacts::findOrFail($id);
+        $contact->delete();
+        return redirect()->route('admin.contact')->with(['success' => sprintf('%s Berhasil Dihapus.', $contact->whatsapp_number)]);
     }
 }

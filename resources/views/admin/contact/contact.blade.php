@@ -70,7 +70,7 @@
                                 <label class="form-check-label" for="is_active">{{!empty($item->is_active) ? 'Aktif' : 'Tidak Aktif'}}</label>
                             </td>
                             <td class="text-center" width="10%">
-                              <form onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data {{$item->name}} ?');" action="{{ route('admin.contact.destroy', $item->id) }}" method="POST">
+                              <form onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus Data {{$item->whatsapp_number}} ?');" action="{{ route('admin.contact.destroy', $item->id) }}" method="POST">
                                   <a href="{{ route('admin.contact.edit', $item->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                                   @csrf
                                   @method('DELETE')
