@@ -49,6 +49,7 @@
                   <thead>
                     <tr>
                       <th>Nomor HP (Whatsapp)</th>
+                      <th>Sosial Media</th>
                       <th>Alamat Lengkap</th>
                       <th>Deskripsi</th>
                       <th>Isi Pesan</th>
@@ -59,10 +60,15 @@
                   </thead>
                   <tbody>
                     @foreach ($contacts as $item)
+                      @php
+                        $address     = substr_replace($item->address, ' ...', 20);
+                        $description = substr_replace($item->description, ' ...', 20);
+                      @endphp
                         <tr>
                             <td width="10%">{{$item->whatsapp_number}}</td>
-                            <td width="10%">{{$item->address}}</td>
-                            <td width="10%">{{$item->description}}</td>
+                            <td width="10%"><a href="{{$item->social_media}}" target="_blank">{{$item->social_media}}</a></td>
+                            <td width="10%">{{$address}}</td>
+                            <td width="10%">{{$description}}</td>
                             <td width="10%">{{$item->text_message}}</td>
                             <td width="30%">{!!$item->url_google_maps!!}</td>
                             <td width="10%">

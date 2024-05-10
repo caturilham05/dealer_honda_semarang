@@ -33,6 +33,9 @@
                     <h4 class="m-0">Spesifikasi</h4>
                   </button>
                   <button class="nav-link w-100 d-flex align-items-center text-start p-3" style="margin-bottom: 1rem" data-bs-toggle="pill" data-bs-target="#tab-pane-4" type="button">
+                    <h4 class="m-0">Cicilan / Kredit</h4>
+                  </button>
+                  <button class="nav-link w-100 d-flex align-items-center text-start p-3" style="margin-bottom: 1rem" data-bs-toggle="pill" data-bs-target="#tab-pane-5" type="button">
                     <h4 class="m-0">Deskripsi</h4>
                   </button>
               </div>
@@ -42,6 +45,15 @@
                   <div class="tab-pane fade show active" id="tab-pane-1">
                       <div class="row g-4">
                           <div class="col-md-12">
+                            <div class="owl-carousel testimonial-carousel position-relative mb-4 img-detail">
+                              @foreach ($products as $item)
+                                @if ($product_detail['product_type_id'] == $item['product_type_id'])
+                                  <div class="testimonial-item text-center">
+                                    <img class="card-img bg-light p-2 mx-auto mb-3" src="{{asset('/storage/products/'.$item['image'])}}">
+                                  </div>
+                                @endif
+                              @endforeach
+                            </div>
                             <div class="table">
                               <table class="table">
                                 <thead>
@@ -94,7 +106,7 @@
                               {{-- <div class="owl-carousel testimonial-carousel position-relative"> --}}
                                 @foreach ($product_detail['images'] as $key => $image)
                                   {{-- <div class="testimonial-item text-center"> --}}
-                                    <img class="card-img bg-light p-2 mx-auto mb-3" src="{{asset('/storage/products/'.$image['images'])}}" id="imgShowDetail_{{$key}}">
+                                    <img class="img-brosure bg-light p-2 mx-auto mb-3" src="{{asset('/storage/products/'.$image['images'])}}" id="imgShowDetail_{{$key}}">
                                     @include('public.partials.image_fullscreen', ['image' => $image['images'], 'key' => $key, 'path' => '/storage/products/'])
                                   {{-- </div> --}}
                                 @endforeach
@@ -113,6 +125,38 @@
                       </div>
                   </div>
                   <div class="tab-pane fade" id="tab-pane-4">
+                      <div class="row g-4">
+                          <div class="col-md-12">
+                            @if (!empty($product_detail['products_installments']))
+                              <div class="table">
+                                <table class="table table-responsive table-bordered table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th>Tenor</th>
+                                      <th>Angsuran</th>
+                                      <th>TDP</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    @foreach ($product_detail['products_installments'] as $item)
+                                      <tr>
+                                        <td width="30%">{{$item['tenor']['tenor'].' '.$item['tenor']['unit']}}</td>
+                                        <td width="30%">{{Helper::helper_number_format($item['price_installment'])}}</td>
+                                        <td width="30%">{{Helper::helper_number_format($item['tdp'])}}</td>
+                                      </tr>
+                                    @endforeach
+                                  </tbody>
+                                </table>
+                              </div>
+                              <a href="{{route('public.credits.credit_simulation')}}" class="btn btn-primary py-3 px-5">Simulasi Kredit<i class="fa fa-arrow-right ms-3"></i></a>
+                            @else
+                              <h3>Cicilan / Kredit tidak tersedia</h3>
+                            @endif
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="tab-pane-5">
                       <div class="row g-4">
                           <div class="col-md-12">
                             <span>{!! $product_detail['description'] !!}</span>

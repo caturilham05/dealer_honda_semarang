@@ -42,6 +42,7 @@ class ContactController extends Controller
         $post = [
             'whatsapp_number' => $request->whatsapp_number,
             'address'         => $request->address,
+            'social_media'    => $request->social_media,
             'description'     => $request->description,
             'text_message'    => $request->text_message,
             'url_google_maps' => $request->url_google_maps,
@@ -78,6 +79,7 @@ class ContactController extends Controller
         $post = [
             'whatsapp_number' => $request->whatsapp_number,
             'address'         => $request->address,
+            'social_media'    => $request->social_media,
             'description'     => $request->description,
             'text_message'    => $request->text_message,
             'url_google_maps' => $request->url_google_maps,

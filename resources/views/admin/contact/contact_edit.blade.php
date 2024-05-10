@@ -50,6 +50,10 @@
               <label for="text_message">Isi Pesan</label>
               <textarea class="form-control" rows="3" name="text_message" placeholder="Isi Pesan">{{old('text_message', $item['text_message'])}}</textarea>
             </div>
+            <div class="form-group">
+              <label for="social_media">Sosial Media</label>
+              <input type="text" class="form-control" id="social_media" name="social_media" value="{{old('social_media', $item['social_media'])}}" placeholder="Sosial Media">
+            </div>
             <div class="form-check">
               <input type="checkbox" name="is_active" class="form-check-input" id="is_active" {{!empty($item['is_active']) ? 'checked' : ''}}>
               <label class="form-check-label" for="is_active">Aktif / Tidak Aktif</label>

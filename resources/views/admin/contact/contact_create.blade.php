@@ -54,6 +54,11 @@
               <textarea class="form-control" rows="3" name="text_message" placeholder="Isi Pesan"></textarea>
             </div>
 
+            <div class="form-group">
+              <label for="social_media">Sosial Media</label>
+              <input type="text" class="form-control" id="social_media" name="social_media" placeholder="Sosial Media">
+            </div>
+
 						<div class="form-check">
 							<input type="checkbox" name="is_active" class="form-check-input" id="is_active">
 							<label class="form-check-label" for="is_active">Aktif / Tidak Aktif</label>

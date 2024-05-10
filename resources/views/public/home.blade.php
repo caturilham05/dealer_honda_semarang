@@ -89,7 +89,7 @@
             <div class="owl-carousel testimonial-carousel position-relative">
               @foreach ($testimonial as $testi)
                 <div class="testimonial-item text-center">
-                  <img class="card-img bg-light p-2 mx-auto mb-3" src="{{asset('/storage/testimonial/'.$testi['image'])}}">
+                  <img class="card-img testimoni bg-light p-2 mx-auto mb-3" src="{{asset('/storage/testimonial/'.$testi['image'])}}">
                 </div>
               @endforeach
 
@@ -118,13 +118,17 @@
 												<img style="width: 7%; margin-right: 0.5rem; " src="{{asset('template/logo/wa.png')}}" alt="wa">	                      
 	                      <a href="https://wa.me/+{{$contact['whatsapp_number']}}?text={{$contact['text_message']}}" target="_blank"><h4 class="text-white mb-0 wa">{{$contact['whatsapp_number']}}</h4></a>
                       </div>
+                      <div style="display: flex; align-items: center; margin-bottom: 1rem; letter-spacing: 2px;">
+												<img style="width: 7%; margin-right: 0.5rem; " src="{{asset('template/logo/ig.png')}}" alt="ig">	                      
+	                      <a href="{{$contact['social_media']}}" target="_blank"><h4 class="text-white mb-0 wa">@Mahdipali</h4></a>
+                      </div>
                       <h5 class="text-white mb-2">{!!$contact['address']!!}</h5>
                       <p class="text-white mb-0">{!!$contact['description']!!}</p>
                   </div>
               </div>
               @if (!empty($contact['url_google_maps']))
 	              <div class="col-lg-6">
-	                  <div class="bg-primary h-100 d-flex flex-column justify-content-center text-center p-4 wow zoomIn" data-wow-delay="0.6s">
+	                  <div class="h-100 d-flex flex-column justify-content-center text-center pb-3 wow zoomIn" data-wow-delay="0.6s">
 	                  	{!! $contact['url_google_maps'] !!}
 	                  </div>
 	              </div>

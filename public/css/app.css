@@ -22,6 +22,14 @@
    margin: 1rem;
 }
 
+.img-brosure{
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+   width: 60%;
+   margin: 1rem;
+}
+
 .wa:hover{
    color: #D81324 !important;
 }
@@ -57,16 +65,42 @@
       height: auto;
    }
 
-   .card-img{
-      max-width: 400px;
+   .card-img.testimoni{
+      height: 400px;
    }
+
+   .img-brosure{
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      height: 250px;
+      width: 100%;
+      margin: 1rem;
+   }
+
+   /*.img-detail{
+      display: none !important;
+   }*/
 }
 
 @media screen and (max-width: 800px){
    .logo_wa_car_detail{
       width: 30%;
    }
-   .card-img{
-      max-width: 400px;
+   .card-img.testimoni{
+      height: 400px;
    }
+
+   .img-brosure{
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      height: 250px;
+      width: 100%;
+      margin: 1rem;
+   }
+
+   /*.img-detail{
+      display: none !important;
+   }*/
 }
