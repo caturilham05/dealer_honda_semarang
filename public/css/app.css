@@ -22,6 +22,10 @@
    margin: 1rem;
 }
 
+.card-img.testimoni{
+   height: 350px;
+}
+
 .img-brosure{
    background-size: cover;
    background-repeat: no-repeat;
@@ -66,7 +70,7 @@
    }
 
    .card-img.testimoni{
-      height: 400px;
+      height: 430px;
    }
 
    .img-brosure{
@@ -88,7 +92,7 @@
       width: 30%;
    }
    .card-img.testimoni{
-      height: 400px;
+      height: 430px;
    }
 
    .img-brosure{

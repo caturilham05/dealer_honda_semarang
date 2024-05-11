@@ -128,7 +128,7 @@
               </div>
               @if (!empty($contact['url_google_maps']))
 	              <div class="col-lg-6">
-	                  <div class="h-100 d-flex flex-column justify-content-center text-center pb-3 wow zoomIn" data-wow-delay="0.6s">
+	                  <div class="h-100 d-flex flex-column justify-content-center text-center pb-3 pt-3 wow zoomIn" data-wow-delay="0.6s">
 	                  	{!! $contact['url_google_maps'] !!}
 	                  </div>
 	              </div>
