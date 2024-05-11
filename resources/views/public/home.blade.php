@@ -10,7 +10,7 @@
           	@foreach ($imageslider as $images)
           		@foreach ($images['images'] as $item)
 		            <div class="carousel-item {{($active == 1) ? 'active' : ''}}">
-		                <img class="w-100" src="{{asset('/storage/images/imageslider/'.$item['images'])}}" alt="Image">
+		                <img alt="{{$item['images']}}" class="w-100" src="{{asset('/storage/images/imageslider/'.$item['images'])}}" alt="Image">
 		            </div>
 		            @php
 		            	$active++;
@@ -42,7 +42,7 @@
 		          <div class="row g-5">
 		          	<div class="col-lg-12 pt-2">
 		          		@if (!empty($item['image']))
-		                <img class="bg-light mx-auto mb-3" src="{{asset('/storage/contents/'.$item['image'])}}" width="100%" id="imgShow">
+		                <img alt="{{$item['image']}}" class="bg-light mx-auto mb-3" src="{{asset('/storage/contents/'.$item['image'])}}" width="100%" id="imgShow">
                     @include('public.partials.image_fullscreen', ['image' => $item['image'], 'path' => '/storage/contents/'])
 		          		@endif
 		          		{!! $item['content'] !!}
@@ -62,7 +62,7 @@
 							      $description = substr_replace($product['description'], '...', 20);
 	        				@endphp
 			            <div class="testimonial-item text-center">
-			                <img class="card-img bg-light p-2 mx-auto mb-3" src="{{asset('/storage/products/'.$product['image'])}}">
+			                <img alt="{{$product['image']}}" class="card-img bg-light p-2 mx-auto mb-3" src="{{asset('/storage/products/'.$product['image'])}}">
 	                    <h5 class="mb-0"><a href="{{route('public.product_detail', $product['id'])}}">{{$product['name']}}</a></h5>
 	                    <p>Rp.{{Helper::helper_number_format($product['price'])}}</p>
 	                    <div class="testimonial-text bg-light text-center p-4">
@@ -89,13 +89,13 @@
             <div class="owl-carousel testimonial-carousel position-relative">
               @foreach ($testimonial as $testi)
                 <div class="testimonial-item text-center">
-                  <img class="card-img testimoni bg-light p-2 mx-auto mb-3" src="{{asset('/storage/testimonial/'.$testi['image'])}}">
+                  <img alt="{{$testi['image']}}" class="card-img testimoni bg-light p-2 mx-auto mb-3" src="{{asset('/storage/testimonial/'.$testi['image'])}}">
                 </div>
               @endforeach
 
             	{{-- @foreach ($testimonial as $testi)            		
                 <div class="testimonial-item text-center">
-                    <img class="bg-light p-2 mx-auto mb-3" src="{{asset('/storage/testimonial/'.$testi['image'])}}" style="width: 80px; height: 80px;">
+                    <img alt="{{$testi['image']}}" class="bg-light p-2 mx-auto mb-3" src="{{asset('/storage/testimonial/'.$testi['image'])}}" style="width: 80px; height: 80px;">
                     <h5 class="mb-3">{{$testi['name']}}</h5>
                     <div class="testimonial-text bg-light text-center p-4">
                     <p class="mb-0">{{$testi['description']}}</p>
