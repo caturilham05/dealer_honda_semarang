@@ -10,7 +10,7 @@
     <meta name="googlebot-news" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Selamat datang di Dealer Resmi Mobil Honda Jawa Tengah. Coverage area Semarang, Demak, Kudus, Grobogan, Pati, Purwodadi, Kendal, Ambarawa, Pekalongan, Tegal, Batang, Kendal, Solo, Surakarta, Salatiga, Pemalang, Brebes, untuk anda yang ada di area Semarang Jateng lagi mencari Harga Teringan Mobil Honda Brio Di Semarang 2023 maka sahabat Honda datang di tempat yang tepat">
-    <meta name="keywords" content="Indonesia Electric Motor Show 2019, Mobil Listrik, Kendaraan Listrik, Motor Listrik, Pameran Mobil Listrik, Pameran Kendaraan Listrik, Electric Vehicle, cara jitu mengenal mobil listrik, inovasi kendaraan, hybrid, aoutonomous, future vehicle, batery mobil listrik, charging station, battery vehicle, baterei kendaraan listrik, isi ulang mobil listrik, charger mobil listrik, charger motor istrik">
+    <meta name="keywords" content="dealer honda, mobil honda, dealer mobil, honda mobil, honda dealer, dealer honda semarang, honda mobil semarang, dealer semarang, semarang dealer, seamarang, honda dealer">
     <meta name="developer" content="caturilham05.github.io/portfolio">
     <meta name="Author" content="{{url('/')}}">
     <meta name="ROBOTS" content="all, index, follow">
