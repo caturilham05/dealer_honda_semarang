@@ -121,6 +121,7 @@
     $(document).ready(function(){
       number_custom('#price');
       number_custom('#tdp');
+      number_custom('#price_installment');
       number_custom('#price_installment_1');
       number_custom('#price_installment_2');
       number_custom('#price_installment_3');

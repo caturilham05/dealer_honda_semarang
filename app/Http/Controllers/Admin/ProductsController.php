@@ -112,6 +112,17 @@ class ProductsController extends Controller
 
         $request->price = str_replace('.', '', $request->price);
         $request->price = $request->price;
+        foreach ($request->price_installment as $key => $value) {
+            $value                   = str_replace('.', '', $value);
+            $price_installment[$key] = $value;
+        }
+        $request->price_installment = $price_installment;
+
+        foreach ($request->tdp as $key => $value) {
+            $value     = str_replace('.', '', $value);
+            $tdp[$key] = $value;
+        }
+        $request->tdp = $tdp;
 
         try {
 
