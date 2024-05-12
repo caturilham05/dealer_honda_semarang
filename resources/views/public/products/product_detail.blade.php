@@ -33,13 +33,10 @@
                     <h4 class="m-0">Spesifikasi</h4>
                   </button>
                   <button class="nav-link w-100 d-flex align-items-center text-start p-3" style="margin-bottom: 1rem" data-bs-toggle="pill" data-bs-target="#tab-pane-4" type="button">
-                    <h4 class="m-0">Fitur Spesial</h4>
+                    <h4 class="m-0">Cicilan / Kredit</h4>
                   </button>
                   <button class="nav-link w-100 d-flex align-items-center text-start p-3" style="margin-bottom: 1rem" data-bs-toggle="pill" data-bs-target="#tab-pane-5" type="button">
                     <h4 class="m-0">Deskripsi</h4>
-                  </button>
-                  <button class="nav-link w-100 d-flex align-items-center text-start p-3" style="margin-bottom: 1rem" data-bs-toggle="pill" data-bs-target="#tab-pane-6" type="button">
-                    <h4 class="m-0">Cicilan / Kredit</h4>
                   </button>
               </div>
           </div>
@@ -130,22 +127,6 @@
                   <div class="tab-pane fade" id="tab-pane-4">
                       <div class="row g-4">
                           <div class="col-md-12">
-                            <span>{!! $product_detail['special_feature'] !!}</span>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="tab-pane fade" id="tab-pane-5">
-                      <div class="row g-4">
-                          <div class="col-md-12">
-                            <span>{!! $product_detail['description'] !!}</span>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="tab-pane fade" id="tab-pane-6">
-                      <div class="row g-4">
-                          <div class="col-md-12">
                             @if (!empty($product_detail['products_installments']))
                               <div class="table">
                                 <table class="table table-responsive table-bordered table-hover">
@@ -171,6 +152,14 @@
                             @else
                               <h3>Cicilan / Kredit tidak tersedia</h3>
                             @endif
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="tab-pane-5">
+                      <div class="row g-4">
+                          <div class="col-md-12">
+                            <span>{!! $product_detail['description'] !!}</span>
                           </div>
                       </div>
                   </div>
