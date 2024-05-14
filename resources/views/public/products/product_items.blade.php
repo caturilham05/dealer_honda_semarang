@@ -18,7 +18,7 @@
       </div>
     </div> --}}
 
-    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="{!!$delay!!}s">
+    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.01s">
         <a href="{{route('public.product_detail', $product['id'])}}">
           <div class="team-item">
             <div class="position-relative overflow-hidden">

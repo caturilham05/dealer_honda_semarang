@@ -107,7 +107,7 @@
                                 @foreach ($product_detail['images'] as $key => $image)
                                   {{-- <div class="testimonial-item text-center"> --}}
                                     <img class="img-brosure bg-light p-2 mx-auto mb-3" src="{{asset('/storage/products/'.$image['images'])}}" id="imgShowDetail_{{$key}}">
-                                    @include('public.partials.image_fullscreen', ['image' => $image['images'], 'key' => $key, 'path' => '/storage/products/'])
+                                    @include('public.partials.image_fullscreen', ['image' => $image['images'], 'key' => $key, 'path' => '/storage/products/', 'attr_id' => 'imageFullscreen'])
                                   {{-- </div> --}}
                                 @endforeach
                               {{-- </div> --}}
@@ -120,6 +120,12 @@
                   <div class="tab-pane fade" id="tab-pane-3">
                       <div class="row g-4">
                           <div class="col-md-12">
+                            @if (!empty($product_detail['specification_images']))
+                              @foreach ($product_detail['specification_images'] as $key => $image)
+                                <img class="img-specification bg-light p-2 mx-auto mb-3" src="{{asset('/storage/products/specification/'.$image['images'])}}" id="imgShowDetailSpesifikasi_{{$key}}" width="100%">
+                                @include('public.partials.image_fullscreen', ['image' => $image['images'], 'key' => $key, 'path' => '/storage/products/specification/', 'attr_id' => 'imageFullscreenSpesifikasi'])
+                              @endforeach
+                            @endif
                             <span>{!! $product_detail['specification'] !!}</span>
                           </div>
                       </div>
@@ -177,11 +183,17 @@
 @section('script')
 	<script type="text/javascript">
 	    $(document).ready(function(){
-        $('.card-img').each((index, item) => {
+        $('.img-brosure').each((index, item) => {
           $(`#imgShowDetail_${index}`).on('click', function(){
             $(`#imageFullscreen_${index}`).modal('show')
           })
         })
+        $('.img-specification').each((index, item) => {
+          $(`#imgShowDetailSpesifikasi_${index}`).on('click', function(){
+            $(`#imageFullscreenSpesifikasi_${index}`).modal('show')
+          })
+        })
+
         // $('#imgShowDetail').on('click', function(){
         //   $('#imageFullscreen').modal('show')
         // })

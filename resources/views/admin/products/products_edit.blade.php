@@ -81,6 +81,13 @@
             </div>
 
             <div class="form-group">
+              <label for="specification_images">Unggah Spesifikasi Mobil</label>
+              <div class="col-md-6">
+                <input type="file" class="form-control" name="specification_images[]" multiple>
+              </div>
+            </div>
+
+            <div class="form-group">
               <label for="special_feature">Fitur Spesial</label>
               <textarea id="summernote1" name="special_feature">{{old('special_feature', $product['special_feature'])}}</textarea>
             </div>

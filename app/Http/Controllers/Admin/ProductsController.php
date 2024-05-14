@@ -125,7 +125,6 @@ class ProductsController extends Controller
         $request->tdp = $tdp;
 
         try {
-
             DB::beginTransaction();
             if ($request->hasFile('images'))
             {
@@ -155,18 +154,33 @@ class ProductsController extends Controller
                 }
             }
 
+            if ($request->hasFile('specification_images'))
+            {
+                $specification_images = [];
+                foreach ($request->file('specification_images') as $specification) {
+                    if ($specification->isValid()) {
+                        $filename_specification = round(microtime(true) * 1000).'-'.str_replace(' ','-',$specification->getClientOriginalName());
+                        $specification->storeAs('public/products/specification', $filename_specification);
+                        $specification_images[] = [
+                            'images' => $filename_specification,
+                        ];
+                    }
+                }
+            }
+
             $post = [
-                'product_type_id' => $request->product_type_id,
-                'promo_id'        => $request->promo_id,
-                'name'            => $request->name,
-                'price'           => $request->price,
-                'specification'   => $request->specification,
-                'special_feature' => $request->special_feature,
-                'description'     => $request->description,
-                'is_active'       => !empty($request->is_active) ? 1 : 0,
-                'image'           => !empty($files) ? $files[0]['images'] : null,
-                'images'          => $files ?? NULL,
-                'brochure'        => $brochure ?? NULL,
+                'product_type_id'      => $request->product_type_id,
+                'promo_id'             => $request->promo_id,
+                'name'                 => $request->name,
+                'price'                => $request->price,
+                'specification'        => $request->specification,
+                'special_feature'      => $request->special_feature,
+                'description'          => $request->description,
+                'is_active'            => !empty($request->is_active) ? 1 : 0,
+                'image'                => !empty($files) ? $files[0]['images'] : null,
+                'images'               => $files ?? NULL,
+                'brochure'             => $brochure ?? NULL,
+                'specification_images' => $specification_images ?? NULL,
             ];
 
             $last_id = Products::create($post);
@@ -402,18 +416,40 @@ class ProductsController extends Controller
                 }
             }
 
+            if ($request->hasFile('specification_images'))
+            {
+                $specification_images = [];
+                foreach ($request->file('specification_images') as $specification) {
+                    if ($specification->isValid()) {
+                        $filename_specification = round(microtime(true) * 1000).'-'.str_replace(' ','-',$specification->getClientOriginalName());
+                        $specification->storeAs('public/products/specification', $filename_specification);
+                        $specification_images[] = [
+                            'images' => $filename_specification,
+                        ];
+                    }
+                }
+
+                if (!empty($product->specification_images)) {
+                    foreach ($product->specification_images as $image) {
+                        //delete old image
+                        Storage::delete('public/products/specification/'.$image['images']);
+                    }
+                }
+            }
+
             $post = [
-                'product_type_id' => $request->product_type_id,
-                'promo_id'        => $request->promo_id,
-                'name'            => $request->name,
-                'price'           => $request->price,
-                'specification'   => $request->specification,
-                'special_feature' => $request->special_feature,
-                'description'     => $request->description,
-                'is_active'       => !empty($request->is_active) ? 1 : 0,
-                'image'           => !empty($files) ? $files[0]['images'] : $product->image,
-                'images'          => $files ?? $product->images,
-                'brochure'        => $brochure ?? $product->brochure,
+                'product_type_id'      => $request->product_type_id,
+                'promo_id'             => $request->promo_id,
+                'name'                 => $request->name,
+                'price'                => $request->price,
+                'specification'        => $request->specification,
+                'special_feature'      => $request->special_feature,
+                'description'          => $request->description,
+                'is_active'            => !empty($request->is_active) ? 1 : 0,
+                'image'                => !empty($files) ? $files[0]['images'] : $product->image,
+                'images'               => $files ?? $product->images,
+                'brochure'             => $brochure ?? $product->brochure,
+                'specification_images' => $specification_images ?? $product->specification_images,
             ];
 
             $product->update($post);

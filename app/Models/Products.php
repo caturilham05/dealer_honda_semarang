@@ -16,6 +16,7 @@ class Products extends Model
         'name',
         'price',
         'specification',
+        'specification_images',
         'special_feature',
         'description',
         'image',
@@ -25,8 +26,9 @@ class Products extends Model
     ];
 
     protected $casts = [
-        'images'   => 'array',
-        'brochure' => 'array'
+        'images'               => 'array',
+        'brochure'             => 'array',
+        'specification_images' => 'array',
     ];
 
     public function product_type()
