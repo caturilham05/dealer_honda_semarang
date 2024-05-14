@@ -2,7 +2,7 @@
 	<h4 class="text-primary text-uppercase text-center">Daftar Mobil tidak ditemukan</h4>          		
 @else
 	@php
-		$delay = 0.02;
+		$delay = 0.000001;
 	@endphp
 	@foreach ($products as $product)
 		@php

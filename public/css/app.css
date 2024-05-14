@@ -85,6 +85,9 @@
    /*.img-detail{
       display: none !important;
    }*/
+   .content{
+      margin-top: -250px;
+   }
 }
 
 @media screen and (max-width: 800px){
