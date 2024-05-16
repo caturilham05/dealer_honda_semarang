@@ -200,10 +200,15 @@ class ProductsController extends Controller
             }
             Products_installments::insert($post_installment);
             DB::commit(); // <= Commit the changes
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack(); // <= Rollback in case of an exception
-            dd($e);
+            if (!($e instanceof SQLException)) {
+                app()->make(\App\Exceptions\Handler::class)->report($e); // Report the exception if you don't know what actually caused it
+            }
+            \Log::error($e);
+            return redirect()->route('admin.products_list')->with(['error' => sprintf('something error when add new car. please try again later.')]);
         }
+
         return redirect()->route('admin.products_list')->with(['success' => sprintf('%s Berhasil Disimpan.', $request->name)]);
     }
 
@@ -348,6 +353,7 @@ class ProductsController extends Controller
         $request->price = $request->price;
 
         try {
+            DB::beginTransaction();
             $product             = Products::findOrFail($id);
             $product_installment = Products_installments::where('product_id', $id)->get();
 
@@ -453,8 +459,14 @@ class ProductsController extends Controller
             ];
 
             $product->update($post);
-        } catch (Exception $e) {
-            dd($e);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack(); // <= Rollback in case of an exception
+            if (!($e instanceof SQLException)) {
+                app()->make(\App\Exceptions\Handler::class)->report($e); // Report the exception if you don't know what actually caused it
+            }
+            \Log::error($e);
+            return redirect()->route('admin.products_list')->with(['error' => sprintf('something error when update car. please try again later.')]);
         }
 
         return redirect()->route('admin.products_list')->with(['success' => sprintf('%s Berhasil Diupdate.', $request->name)]);

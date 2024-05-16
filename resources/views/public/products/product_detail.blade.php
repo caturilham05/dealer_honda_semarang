@@ -35,9 +35,9 @@
                   <button class="nav-link w-100 d-flex align-items-center text-start p-3" style="margin-bottom: 1rem" data-bs-toggle="pill" data-bs-target="#tab-pane-4" type="button">
                     <h4 class="m-0">Cicilan / Kredit</h4>
                   </button>
-                  <button class="nav-link w-100 d-flex align-items-center text-start p-3" style="margin-bottom: 1rem" data-bs-toggle="pill" data-bs-target="#tab-pane-5" type="button">
+                  {{-- <button class="nav-link w-100 d-flex align-items-center text-start p-3" style="margin-bottom: 1rem" data-bs-toggle="pill" data-bs-target="#tab-pane-5" type="button">
                     <h4 class="m-0">Deskripsi</h4>
-                  </button>
+                  </button> --}}
               </div>
           </div>
           <div class="col-lg-8">
@@ -90,7 +90,7 @@
                   <div class="tab-pane fade" id="tab-pane-2">
                       <div class="row g-4">
                           <div class="col-md-12">
-                            @if (!empty($product_detail['brochure']))
+                            {{-- @if (!empty($product_detail['brochure']))
                               <div class="brochure-detail">
                                 @foreach ($product_detail['brochure'] as $value)
                                   <div style="margin-bottom: 1rem;">
@@ -100,13 +100,13 @@
                               </div>          
                             @else
                               <h1>Brosur Tidak Tersedia</h1>
-                            @endif
+                            @endif --}}
 
                             @if (!empty($product_detail['images']))
                               {{-- <div class="owl-carousel testimonial-carousel position-relative"> --}}
                                 @foreach ($product_detail['images'] as $key => $image)
                                   {{-- <div class="testimonial-item text-center"> --}}
-                                    <img class="img-brosure bg-light p-2 mx-auto mb-3" src="{{asset('/storage/products/'.$image['images'])}}" id="imgShowDetail_{{$key}}">
+                                    <img class="img-brosures bg-light p-2 mx-auto mb-3" src="{{asset('/storage/products/'.$image['images'])}}" id="imgShowDetail_{{$key}}" width="100%">
                                     @include('public.partials.image_fullscreen', ['image' => $image['images'], 'key' => $key, 'path' => '/storage/products/', 'attr_id' => 'imageFullscreen'])
                                   {{-- </div> --}}
                                 @endforeach
@@ -162,13 +162,13 @@
                       </div>
                   </div>
 
-                  <div class="tab-pane fade" id="tab-pane-5">
+                  {{-- <div class="tab-pane fade" id="tab-pane-5">
                       <div class="row g-4">
                           <div class="col-md-12">
                             <span>{!! $product_detail['description'] !!}</span>
                           </div>
                       </div>
-                  </div>
+                  </div> --}}
               </div>
           </div>
       </div>
@@ -183,7 +183,7 @@
 @section('script')
 	<script type="text/javascript">
 	    $(document).ready(function(){
-        $('.img-brosure').each((index, item) => {
+        $('.img-brosures').each((index, item) => {
           $(`#imgShowDetail_${index}`).on('click', function(){
             $(`#imageFullscreen_${index}`).modal('show')
           })

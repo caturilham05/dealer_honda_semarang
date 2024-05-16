@@ -12,22 +12,18 @@
 
   <div class="container-xxl">
     <div class="container">
+      {{-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScrQVPZDRyMOCpzYgd_jymM2jZwhvYbY6ox9To8SBAuBBhUsQ/viewform?embedded=true" width="100%" height="2500" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe> --}}
       <form action="" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-3">
           <label>Tipe Mobil</label>
-          <select class="form-control {{-- @error('product_type_id') is-invalid @enderror --}}" name="product_type_id" id="product_type_id">
+          <select class="form-control" name="product_type_id" id="product_type_id">
             <option value="">Pilih Tipe Mobil</option>
             @foreach ($product_types as $item)
               <option value="{{$item['id']}}">{{$item['name']}}</option>
             @endforeach
           </select>
           <small style="color: #D81324 !important;">Silahkan Pilih tipe mobil terlebih dahulu untuk melakukan simulasi kredit</small>
-          {{-- @error('product_type_id')
-              <div class="alert alert-danger mt-2">
-                  {{ $message }}
-              </div>
-          @enderror --}}
         </div>
 
         <div id="product_type_ajax">
@@ -37,10 +33,6 @@
           </div>
         </div>
         <div id="car_ajax"></div>
-
-        {{-- <div style="margin-top: 1rem;">
-          <button type="submit" class="btn btn-primary">Simulasi Kredit</button>
-        </div> --}}
       </form>
     </div>
   </div>
