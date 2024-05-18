@@ -54,6 +54,40 @@
     z-index: 9999;
 }
 
+/*cookies*/
+.modalbox{
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   position: fixed;
+   left: 45%;
+   bottom: -60px;
+   transform: translate(-50%, -50%);
+   width: 80%;
+   max-width: 450%;
+   text-align: center;
+   padding: 40px 20px;
+   font-size: 18px;
+   font-weight: 500;
+   background: #fff;
+   border-radius: 8px;
+   z-index: 999;
+}
+
+.modalbox button{
+   background: #ff5945;
+   color: #fff;
+   padding: 15px 0;
+   border-radius: 4px;
+   font-size: 20px;
+   font-weight: 500;
+   width: 20%;
+   border: 0;
+   outline: 0;
+   cursor: pointer;
+}
+/*cookies*/
+
 
 @media screen and (max-width: 480px){
    .logo_wa_car_detail{

@@ -57,7 +57,6 @@
     <!-- Navbar End -->
 
     @yield('content')
-    @include('cookie-consent::index')
     
     <!-- Footer Start -->
     @include('public.components.footer')
@@ -65,7 +64,7 @@
 
     <!-- Back to Top -->
     @include('public.components.back_to_top')
-
+    @include('cookie-consent::index')
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
