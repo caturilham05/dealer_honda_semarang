@@ -71,7 +71,7 @@
    font-weight: 500;
    background: #fff;
    border-radius: 8px;
-   z-index: 999;
+   z-index: 9999;
 }
 
 .modalbox button{
@@ -139,6 +139,16 @@
       height: 250px;
       width: 100%;
       margin: 1rem;
+   }
+
+   .modalbox{
+      display: flex;
+      flex-direction: column;
+      bottom: -110px;
+      left: 50%;
+   }
+   .modalbox button{
+      width: 50%;
    }
 
    /*.img-detail{
