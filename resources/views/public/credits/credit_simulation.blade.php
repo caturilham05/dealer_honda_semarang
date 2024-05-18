@@ -12,8 +12,9 @@
 
   <div class="container-xxl">
     <div class="container">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfLi0ZErnNt3OPWyTSMbG-zDpKm_T2i-US9GQnS2WZWPow7oQ/viewform?embedded=true" width="100%" height="2500" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
       {{-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScrQVPZDRyMOCpzYgd_jymM2jZwhvYbY6ox9To8SBAuBBhUsQ/viewform?embedded=true" width="100%" height="2500" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe> --}}
-      <form action="" method="POST" enctype="multipart/form-data">
+      {{-- <form action="" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-3">
           <label>Tipe Mobil</label>
@@ -33,7 +34,7 @@
           </div>
         </div>
         <div id="car_ajax"></div>
-      </form>
+      </form> --}}
     </div>
   </div>
 @endsection
