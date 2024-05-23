@@ -35,13 +35,17 @@ class CreditController extends Controller
 
     public function credit_terms()
     {
-        $this->data_view['title'] = 'Syarat Kredit';
+        $this->data_view['title']        = 'Syarat Kredit';
+        $this->data_view['meta_content'] = 'Honda Semarang Center juga melayani pembelian mobil Honda dengan melalui kredit. Kami bantu proses sampai di approve oleh pihak leasing. Berikut beberapa berkas dan persyaratan yang di butuhkan untuk pengajuan kredit mobil Honda Semarang Center';
+        $this->data_view['meta_keyword'] = 'kredit, honda, mobil, dealer, semarang, kredit honda, kredit honda mobil, kredit honda mobil dealer, kredit honda mobil dealer semarang, syarat kredit, syarat kredit honda mobil, syarat kredit mobil semarang';
         return view('public.credits.credit_terms', $this->data_view);
     }
 
     public function credit_simulation()
     {
         $this->data_view['title'] = 'Simulasi Kredit';
+        $this->data_view['meta_content'] = 'Honda Semarang Center juga melayani pembelian mobil Honda dengan melalui kredit. Kami bantu proses sampai di approve oleh pihak leasing. Berikut beberapa berkas dan persyaratan yang di butuhkan untuk pengajuan kredit mobil Honda Semarang Center';
+        $this->data_view['meta_keyword'] = 'kredit, honda, mobil, dealer, semarang, kredit honda, kredit honda mobil, kredit honda mobil dealer, kredit honda mobil dealer semarang, syarat kredit, syarat kredit honda mobil, syarat kredit mobil semarang';
         return view('public.credits.credit_simulation', $this->data_view);
     }
 

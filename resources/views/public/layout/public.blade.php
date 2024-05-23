@@ -5,15 +5,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Dealer Honda Semarang</title>
-    <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
-    <meta name="googlebot-news" content="index, follow">
+    <meta name="robots" content="{{!empty($is_detail) ? 'noindex, nofollow' : 'index, follow'}}">
+    <meta name="googlebot" content="{{!empty($is_detail) ? 'noindex, nofollow' : 'index, follow'}}">
+    <meta name="googlebot-news" content="{{!empty($is_detail) ? 'noindex, nofollow' : 'index, follow'}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Selamat datang di Dealer Resmi Mobil Honda Jawa Tengah. Coverage area Semarang, Demak, Kudus, Grobogan, Pati, Purwodadi, Kendal, Ambarawa, Pekalongan, Tegal, Batang, Kendal, Solo, Surakarta, Salatiga, Pemalang, Brebes, untuk anda yang ada di area Semarang Jateng lagi mencari Harga Teringan Mobil Honda Brio Di Semarang 2023 maka sahabat Honda datang di tempat yang tepat">
-    <meta name="keywords" content="dealer honda, mobil honda, dealer mobil, honda mobil, honda dealer, dealer honda semarang, honda mobil semarang, dealer semarang, semarang dealer, seamarang, honda dealer">
+    <meta name="description" content="{{!empty($meta_content) ? $meta_content : 'Selamat datang di Dealer Resmi Mobil Honda Jawa Tengah. Coverage area Semarang, Demak, Kudus, Grobogan, Pati, Purwodadi, Kendal, Ambarawa, Pekalongan, Tegal, Batang, Kendal, Solo, Surakarta, Salatiga, Pemalang, Brebes, untuk anda yang ada di area Semarang Jateng lagi mencari Harga Teringan Mobil Honda Brio Di Semarang 2023 maka sahabat Honda datang di tempat yang tepat'}}">
+    <meta name="keywords" content="{{!empty($meta_keyword) ? $meta_keyword : 'dealer honda, mobil honda, dealer mobil, honda mobil, honda dealer, dealer honda semarang, honda mobil semarang, dealer semarang, semarang dealer, seamarang, honda dealer'}}">
     <meta name="developer" content="caturilham05.github.io/portfolio">
     <meta name="Author" content="{{url('/')}}">
-    <meta name="ROBOTS" content="all, index, follow">
+    <meta name="ROBOTS" content="{{!empty($is_detail) ? 'noindex, nofollow' : 'all, index, follow'}}">
 
 
     <!-- Favicon -->

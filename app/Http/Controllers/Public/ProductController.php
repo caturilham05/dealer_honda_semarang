@@ -39,7 +39,10 @@ class ProductController extends Controller
 
     public function product_list()
     {
-        $this->data_view['title'] = 'Daftar Mobil';
+        $this->data_view['title']        = 'Daftar Mobil';
+        $car_names                       = implode(', ', array_column($this->data_view['products'], 'name'));
+        $this->data_view['meta_content'] = $this->data_view['contact']['description'];
+        $this->data_view['meta_keyword'] = $car_names;
         return view('public.products.product', $this->data_view);
     }
 
@@ -104,12 +107,17 @@ class ProductController extends Controller
     public function detail($id)
     {
         $this->data_view['product_detail'] = Products::with(['product_type', 'promo', 'products_installments.tenor'])->where('id', $id)->first()->toArray();
+        $this->data_view['is_detail']      = true;
+        $this->data_view['meta_content']   = $this->data_view['product_detail']['name'];
+        $this->data_view['meta_keyword']   = $this->data_view['product_detail']['name'];
         return view('public.products.product_detail', $this->data_view);
     }
 
     public function promo()
     {
-        $this->data_view['title'] = 'Promo';
+        $this->data_view['title']        = 'Promo';
+        $this->data_view['meta_content'] = $this->data_view['promos']['name'];
+        $this->data_view['meta_keyword'] = 'promo honda, promo mobil honda, promo honda mobil, promo honda semarang, promo honda dealer semarang, promo mobil semarang, promo semarang, promo honda';
         return view('public.products.promo', $this->data_view);
     }
 
